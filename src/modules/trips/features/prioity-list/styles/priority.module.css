@@ -1,0 +1,23 @@
+.priority-list-container {
+  @apply relative -top-45px;
+}
+
+.priority-list {
+  @apply grid grid-cols-4 gap-24;
+}
+
+.card-container {
+  @apply rounded-md bg-white py-12 px-8 text-center h-290px;
+}
+
+.card-img {
+  @apply mx-auto;
+}
+
+.card-title {
+  @apply font-bold text-black mx-auto mt-4;
+}
+
+.card-content {
+  @apply font-light text-gray-600 mx-auto text-sm mt-2;
+}

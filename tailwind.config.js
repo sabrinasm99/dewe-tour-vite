@@ -12,6 +12,12 @@ export default {
       textColor:{
         'priceColor': '#FFAF00',
         'placeColor': '#878787'
+      },
+      spacing: {
+        '45px': '45px'
+      },
+      height: {
+        '290px': '290px'
       }
     },
   },

@@ -1,0 +1,39 @@
+.card-container {
+  @apply bg-white rounded-md p-2 relative cursor-pointer;
+}
+
+.card-img {
+  @apply w-full;
+}
+
+.card-title {
+  @apply text-black font-medium mt-1;
+}
+
+.price-and-place-container {
+  @apply flex mt-2;
+}
+
+.card-price {
+  @apply font-medium w-1/2 text-priceColor;
+}
+
+.card-place {
+  @apply font-medium w-1/2 text-sm text-right text-placeColor;
+}
+
+.card-quota {
+  @apply absolute bg-white text-black font-bold rounded-sm text-xs py-1 px-2 top-6 right-0;
+}
+
+.trip-list-container {
+  @apply mt-20 px-5;
+}
+
+.group-tour-text {
+  @apply text-center text-3xl font-bold;
+}
+
+.trip-list {
+  @apply grid grid-cols-3 gap-20 mt-20;
+}

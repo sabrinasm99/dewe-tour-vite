@@ -1,15 +1,16 @@
 import { tripList } from "../../../../fakedata";
 import TripCard from "./TripCard";
+import styles from "./styles/trip.module.css";
 
 export default function TripList() {
   return (
-    <div className="mt-20 px-5">
-      <h2 className="text-center text-3xl font-bold">Group Tour</h2>
-      <div className="grid grid-cols-3 gap-20 mt-20">
+    <section className={styles["trip-list-container"]}>
+      <h2 className={styles["group-tour-text"]}>Group Tour</h2>
+      <article className={styles["trip-list"]}>
         {tripList.map((trip) => (
           <TripCard key={trip.id} trip={trip} />
         ))}
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }

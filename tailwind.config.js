@@ -8,6 +8,10 @@ export default {
     extend: {
       padding: {
         '115px': '115px'
+      },
+      textColor:{
+        'priceColor': '#FFAF00',
+        'placeColor': '#878787'
       }
     },
   },

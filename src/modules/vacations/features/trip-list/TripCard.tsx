@@ -1,3 +1,5 @@
+import styles from "./styles/trip.module.css";
+
 type TripProps = {
   id: number;
   img: string;
@@ -9,33 +11,23 @@ type TripProps = {
 
 export default function TripCard({ trip }: { trip: TripProps }) {
   return (
-    <div
+    <section
       key={trip.id}
       //   onClick={() => {
       //     clickDetail(val.id);
       //   }}
-      className="bg-white rounded-md p-2 relative cursor-pointer"
+      className={styles["card-container"]}
     >
-      <img src={trip.img} alt={trip.img} className="w-full" />
-      <h4 className="text-black font-medium mt-1">{trip.title}</h4>
-      <div className="flex mt-2">
-        <h4 className="font-medium w-1/2" style={{ color: "#FFAF00" }}>
+      <img src={trip.img} alt={trip.img} className={styles["card-img"]} />
+      <h4 className={styles["card-title"]}>{trip.title}</h4>
+      <article className={styles["price-and-place-container"]}>
+        <h4 className={styles["card-price"]}>
           {/* IDR. {trip.price.toLocaleString()} */}
           {trip.price}
         </h4>
-        <h4
-          className="font-medium w-1/2 text-sm text-right"
-          style={{ color: "#878787" }}
-        >
-          {trip.country}
-        </h4>
-      </div>
-      <div
-        className="absolute bg-white text-black font-bold rounded-sm text-xs py-1 px-2"
-        style={{ right: "1.4%", top: "9%" }}
-      >
-        {trip.code}
-      </div>
-    </div>
+        <h4 className={styles["card-place"]}>{trip.country}</h4>
+      </article>
+      <p className={styles["card-quota"]}>{trip.code}</p>
+    </section>
   );
 }

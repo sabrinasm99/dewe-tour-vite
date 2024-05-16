@@ -3,21 +3,21 @@
 }
 
 .priority-list {
-  @apply grid grid-cols-4 gap-24;
+  @apply grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 lg:gap-12 xl:gap-24;
 }
 
 .card-container {
-  @apply rounded-md bg-white py-12 px-8 text-center h-290px;
+  @apply rounded-md bg-white p-4 sm:py-8 sm:px-4 lg:p-8 xl:p-10 text-center;
 }
 
 .card-img {
-  @apply mx-auto;
+  @apply mx-auto w-12 sm:w-16 lg:w-auto;
 }
 
 .card-title {
-  @apply font-bold text-black mx-auto mt-4;
+  @apply font-bold text-black mx-auto mt-2 md:mt-4 text-sm md:text-base xl:text-lg;
 }
 
 .card-content {
-  @apply font-light text-gray-600 mx-auto text-sm mt-2;
+  @apply font-light text-gray-600 mx-auto text-xs md:text-sm mt-2 xl:text-base;
 }

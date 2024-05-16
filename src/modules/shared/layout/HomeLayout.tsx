@@ -6,7 +6,7 @@ import hibiscus from "../images/hibiscus.svg";
 import palm from "../images/palm.svg";
 
 type LayoutProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 export default function HomeLayout({ children }: LayoutProps) {
   return (
@@ -14,10 +14,10 @@ export default function HomeLayout({ children }: LayoutProps) {
       <HeaderHome />
       <div className={styles["app-content"]}>{children}</div>
       <Footer />
-      <div className="absolute" style={{ top: "24%", right: 0 }}>
+      <div className="absolute right-0 top-24%">
         <img src={hibiscus} alt="hibiscus" />
       </div>
-      <div className="absolute" style={{ top: "40%", left: 0 }}>
+      <div className="absolute left-0 top-40%">
         <img src={palm} alt="palm" />
       </div>
     </div>

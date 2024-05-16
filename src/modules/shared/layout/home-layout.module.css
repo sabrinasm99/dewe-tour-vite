@@ -4,5 +4,5 @@
 }
 
 .app-content {
-  @apply flex flex-col mx-auto min-h-screen text-left px-115px;
+  @apply relative min-h-screen text-left px-6 sm:px-12 lg:px-16 xl:px-115px z-10;
 }

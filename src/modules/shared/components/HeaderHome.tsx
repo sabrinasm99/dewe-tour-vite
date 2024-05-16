@@ -12,31 +12,18 @@ export default function HeaderHome() {
   return (
     <>
       <div
-        className="w-full text-white"
+        className="w-full text-white h-450px md:h-535.4px"
         style={{
           backgroundImage: `url(${pantai})`,
-          height: "535.4px",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}
       >
-        <div className="px-16 relative">
+        <div className="px-4 md:px-8 lg:px-10 xl:px-16">
           <div className="flex">
-            <img src={icon} />
+            <img src={icon} className="w-40 sm:w-auto" />
             {localStorage.email ? (
               <div className="ml-auto flex items-center">
-                {/* {image !== "null" ? (
-                <img
-                  src={`https://backend-dewetour.herokuapp.com/image/${image}`}
-                  className="rounded-full border-2 cursor-pointer"
-                  style={{
-                    borderColor: "#FFAF00",
-                    width: "50px",
-                    height: "50px",
-                  }}
-                  onClick={() => setShowModalUser(!showModalUser)}
-                />
-              ) : ( */}
                 <FaUserCircle
                   className="text-gray-700 bg-white rounded-full border-2 cursor-pointer"
                   style={{
@@ -44,24 +31,18 @@ export default function HeaderHome() {
                     width: "44px",
                     height: "44px",
                   }}
-                  //   onClick={() => setShowModalUser(!showModalUser)}
                 />
-                {/* )} */}
               </div>
             ) : (
               <>
                 <div className="flex items-center ml-auto mr-2">
-                  <button
-                    //   onClick={() => setShowModalLogin(true)}
-                    className="border border-white py-1 px-6 font-medium text-sm rounded-md"
-                  >
+                  <button className="border border-white px-2 py-1 md:py-1 md:px-6 font-medium text-sm rounded-md">
                     Login
                   </button>
                 </div>
                 <div className="flex items-center">
                   <button
-                    //   onClick={() => setShowModalRegister(true)}
-                    className="py-1 px-6 font-medium border text-sm rounded-md"
+                    className="px-2 py-1 md:py-1 md:px-6 font-medium border text-sm rounded-md"
                     style={{
                       backgroundColor: "#FFAF00",
                       borderColor: "#FFAF00",
@@ -73,33 +54,27 @@ export default function HeaderHome() {
               </>
             )}
           </div>
-          <div className="mt-5">
-            <h1
-              style={{ fontSize: "60px" }}
-              className="tracking-wide font-bold"
-            >
+          <div className="mt-5 md:mt-14 lg:mt-10 xl:mt-5">
+            <h1 className="tracking-wide font-bold text-40px sm:text-50px md:text-58px lg:text-60px">
               Explore
             </h1>
-            <h2 style={{ fontSize: "60px" }} className="font-hairline">
+            <h2 className="font-thin text-40px sm:text-50px md:text-58px lg:text-60px">
               your amazing city together
             </h2>
           </div>
           <div className="mt-10">
-            <h1 style={{ fontSize: "17px" }}>Find great places to holiday</h1>
+            <h1 className="text-15px md:text-17px">
+              Find great places to holiday
+            </h1>
             <div className="flex mt-2 h-10">
               <input
-                className="bg-white rounded-l-md text-gray-800 focus:outline-none pl-3"
-                style={{ width: "90%" }}
+                className="bg-white rounded-l-md text-gray-800 focus:outline-none pl-3 w-80% md:w-90%"
                 type="search"
                 value={search}
                 name="search"
                 onChange={handleSearch}
               />
-              <button
-                // onClick={submitSearch}
-                className="rounded-r-md flex items-center justify-center font-medium text-lg focus:outline-none"
-                style={{ width: "10%", backgroundColor: "#FFAF00" }}
-              >
+              <button className="rounded-r-md flex items-center justify-center font-medium text-sm md:text-lg focus:outline-none bg-#FFAF00 w-20% md:w-10%">
                 Search
               </button>
             </div>

@@ -11,15 +11,15 @@
 }
 
 .price-and-place-container {
-  @apply flex mt-2;
+  @apply flex flex-col sm:flex-row mt-2;
 }
 
 .card-price {
-  @apply font-medium w-1/2 text-priceColor;
+  @apply font-medium sm:w-1/2 text-priceColor;
 }
 
 .card-place {
-  @apply font-medium w-1/2 text-sm text-right text-placeColor;
+  @apply font-medium sm:w-1/2 text-sm text-right text-placeColor;
 }
 
 .card-quota {
@@ -27,7 +27,7 @@
 }
 
 .trip-list-container {
-  @apply mt-20 px-5;
+  @apply md:mt-5 lg:mt-10 xl:mt-20 xl:px-5;
 }
 
 .group-tour-text {
@@ -35,5 +35,5 @@
 }
 
 .trip-list {
-  @apply grid grid-cols-3 gap-20 mt-20;
+  @apply grid grid-cols-2 lg:grid-cols-3 gap-5 xl:gap-20 mt-10 md:mt-20;
 }

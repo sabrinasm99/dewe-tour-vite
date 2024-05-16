@@ -2,9 +2,13 @@ import { useState } from "react";
 import icon from "../images/icon.svg";
 import { FaUserCircle } from "react-icons/fa";
 import pantai from "../images/pantai.png";
+import RegisterModal from "./modals/RegisterModal";
+import LoginModal from "./modals/LoginModal";
 
 export default function HeaderHome() {
   const [search, setSearch] = useState("");
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleSearch = (e: any) => {
     setSearch(e.target.value);
@@ -36,12 +40,16 @@ export default function HeaderHome() {
             ) : (
               <>
                 <div className="flex items-center ml-auto mr-2">
-                  <button className="border border-white px-2 py-1 md:py-1 md:px-6 font-medium text-sm rounded-md">
+                  <button
+                    onClick={() => setShowLoginModal(true)}
+                    className="border border-white px-2 py-1 md:py-1 md:px-6 font-medium text-sm rounded-md"
+                  >
                     Login
                   </button>
                 </div>
                 <div className="flex items-center">
                   <button
+                    onClick={() => setShowRegisterModal(true)}
                     className="px-2 py-1 md:py-1 md:px-6 font-medium border text-sm rounded-md"
                     style={{
                       backgroundColor: "#FFAF00",
@@ -144,6 +152,10 @@ export default function HeaderHome() {
           <img src={triangle} />
         </div>
       </div> */}
+      {showRegisterModal && (
+        <RegisterModal setShowRegisterModal={setShowRegisterModal} />
+      )}
+      {showLoginModal && <LoginModal setShowLoginModal={setShowLoginModal} />}
     </>
   );
 }

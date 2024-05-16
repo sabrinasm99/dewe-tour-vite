@@ -17,6 +17,7 @@ export default {
         '45px': '45px',
         '24%': '24%',
         '40%': '40%',
+        '100px': '100px',
       },
       height: {
         '535.4px': '535.4px',
@@ -39,8 +40,10 @@ export default {
         '20%': '20%',
       },
       backgroundColor: {
-        '#FFAF00': '#FFAF00'
-      }
+        '#FFAF00': '#FFAF00',
+        '#F1F1F1': '#F1F1F1',
+        '#D2D2D240': '#D2D2D240',
+      },
     },
   },
   plugins: [],

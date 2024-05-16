@@ -1,0 +1,7 @@
+.app-layout {
+  @apply absolute top-0 left-0 w-full min-h-screen text-left bg-#F1F1F1;
+}
+
+.home-content {
+  @apply relative min-h-screen text-left px-6 sm:px-12 lg:px-16 xl:px-115px z-10;
+}

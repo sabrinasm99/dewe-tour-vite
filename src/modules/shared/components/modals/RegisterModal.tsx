@@ -9,19 +9,7 @@ export default function RegisterModal({
 }) {
   return (
     <>
-      <div
-        style={{
-          position: "fixed",
-          zIndex: 200,
-          transform: "translate(-50%,-50%)",
-          backgroundColor: "white",
-          left: "50%",
-          top: "50%",
-          width: "350px",
-          boxShadow: "1px 1px 8px black",
-        }}
-        className="rounded-md py-3 px-6"
-      >
+      <div className="fixed rounded-md py-3 px-6 z-30 bg-white top-50% left-50% -translate-x-50% -translate-y-50% w-350px shadow-modal">
         <h1 className="text-black text-3xl font-bold mt-8 text-center">
           Register
         </h1>
@@ -105,15 +93,7 @@ export default function RegisterModal({
       </div>
       <div
         onClick={() => setShowRegisterModal(false)}
-        style={{
-          position: "fixed",
-          zIndex: 199,
-          top: 0,
-          left: 0,
-          height: "100%",
-          width: "100%",
-          backgroundColor: "rgba(0,0,0,0.5)",
-        }}
+        className="fixed z-20 top-0 left-0 h-full w-full bg-backdrop"
       />
     </>
   );

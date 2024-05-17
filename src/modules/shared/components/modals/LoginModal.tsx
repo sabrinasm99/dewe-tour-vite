@@ -1,37 +1,28 @@
+import React from "react";
 import hibiscusmodal from "../../images/hibiscusmodal.svg";
 import palmmodal from "../../images/palmmodal.svg";
 
 export default function LoginModal({
   setShowLoginModal,
+  setShowRegisterModal,
 }: {
   setShowLoginModal: React.Dispatch<boolean>;
+  setShowRegisterModal: React.Dispatch<boolean>;
 }) {
+  const clickHere = () => {
+    setShowLoginModal(false);
+    setShowRegisterModal(true);
+  };
   return (
     <>
-      <div
-        style={{
-          position: "fixed",
-          zIndex: 200,
-          transform: "translate(-50%,-50%)",
-          backgroundColor: "white",
-          left: "50%",
-          top: "50%",
-          width: "350px",
-          boxShadow: "1px 1px 8px black",
-        }}
-        className="rounded-md py-3 px-6"
-      >
+      <div className="fixed rounded-md py-3 px-6 z-30 bg-white top-50% left-50% -translate-x-50% -translate-y-50% w-350px shadow-modal">
         <h1 className="text-black text-3xl font-bold mt-8 text-center">
           Login
         </h1>
         <div className="mt-12">
           <label className="text-black block font-bold">Email</label>
           <input
-            className="text-gray-800 w-full border pl-1 focus:outline-none rounded"
-            style={{
-              backgroundColor: "rgba(210, 210, 210, 0.25)",
-              borderColor: "rgba(210, 210, 210, 0.25)",
-            }}
+            className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
             type="text"
             name="email"
             // value={inputLogin.email}
@@ -41,11 +32,7 @@ export default function LoginModal({
         <div className="mt-5">
           <label className="text-black block font-bold">Password</label>
           <input
-            className="text-gray-800 w-full border pl-1 focus:outline-none rounded"
-            style={{
-              backgroundColor: "rgba(210, 210, 210, 0.25)",
-              borderColor: "rgba(210, 210, 210, 0.25)",
-            }}
+            className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
             type="password"
             name="password"
             // value={inputLogin.password}
@@ -63,7 +50,9 @@ export default function LoginModal({
         </div>
         <h3 className="text-sm mt-3 font-light" style={{ color: "#B1B1B1" }}>
           Don't have an account? Click{" "}
-          <p className="font-bold inline cursor-pointer">Here</p>
+          <p onClick={clickHere} className="font-bold inline cursor-pointer">
+            Here
+          </p>
         </h3>
         <div className="absolute" style={{ top: 0, left: 0 }}>
           <img src={palmmodal} />
@@ -74,15 +63,7 @@ export default function LoginModal({
       </div>
       <div
         onClick={() => setShowLoginModal(false)}
-        style={{
-          position: "fixed",
-          zIndex: 199,
-          top: 0,
-          left: 0,
-          height: "100%",
-          width: "100%",
-          backgroundColor: "rgba(0,0,0,0.5)",
-        }}
+        className="fixed z-20 top-0 left-0 h-full w-full bg-backdrop"
       />
     </>
   );

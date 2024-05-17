@@ -15,11 +15,11 @@
 }
 
 .card-price {
-  @apply font-medium sm:w-1/2 text-priceColor;
+  @apply font-medium sm:w-1/2 text-#FFAF00;
 }
 
 .card-place {
-  @apply font-medium sm:w-1/2 text-sm text-right text-placeColor;
+  @apply font-medium sm:w-1/2 text-sm text-right text-#878787;
 }
 
 .card-quota {

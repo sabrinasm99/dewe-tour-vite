@@ -1,8 +1,8 @@
 import { useState } from "react";
-import icon from "../images/icon.svg";
+import icon from "../../images/icon.svg";
 import { FaUserCircle } from "react-icons/fa";
-import RegisterModal from "./modals/RegisterModal";
-import LoginModal from "./modals/LoginModal";
+import RegisterModal from "../modals/RegisterModal";
+import LoginModal from "../modals/LoginModal";
 
 export default function HeaderHome() {
   const [search, setSearch] = useState("");

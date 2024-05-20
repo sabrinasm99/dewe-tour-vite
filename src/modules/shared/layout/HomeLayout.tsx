@@ -1,5 +1,5 @@
 import styles from "./layout.module.css";
-import HeaderHome from "../components/HeaderHome";
+import HeaderHome from "../components/headers/HeaderHome";
 import Footer from "../components/Footer";
 import { LayoutProps } from "./types";
 import BaseLayout from "./BaseLayout";

@@ -1,4 +1,4 @@
-import BookingCard from "./BookingCard";
+import BookingCard from "../../components/BookingCard";
 
 export default function PaymentSummary() {
   return (

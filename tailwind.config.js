@@ -48,6 +48,7 @@ export default {
         "#F1F1F1": "#F1F1F1",
         "#D2D2D240": "#D2D2D240",
         backdrop: "rgba(0,0,0,0.5)",
+        "#D3D3D3": "#D3D3D3",
       },
       boxShadow: {
         modal: "1px 1px 8px black",
@@ -55,6 +56,7 @@ export default {
       borderColor: {
         totalPrice: "rgba(183, 183, 183, 0.5)",
         "#FFAF00": "#FFAF00",
+        "#D3D3D3": "#D3D3D3",
       },
       backgroundImage: {
         pantai: `url('/src/modules/shared/images/pantai.png')`,

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import icon from "../images/icon.svg";
+import icon from "../../images/icon.svg";
 
 export default function Header() {
   return (

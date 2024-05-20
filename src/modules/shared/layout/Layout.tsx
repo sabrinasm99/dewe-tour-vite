@@ -7,7 +7,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <BaseLayout>
       <Header />
-      <div>{children}</div>
+      {children}
       <Footer />
     </BaseLayout>
   );

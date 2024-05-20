@@ -2,7 +2,7 @@ import BookingCard from "./BookingCard";
 
 export default function PaymentSummary() {
   return (
-    <div className="flex justify-center mt-12">
+    <div className="grow flex justify-center items-center">
       <BookingCard />
     </div>
   );

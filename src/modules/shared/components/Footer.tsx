@@ -7,7 +7,7 @@ export default function Footer() {
     <div
       className={`${
         pathname === "/payment"
-          ? "absolute bottom-0"
+          ? "relative bottom-0"
           : "relative mt-12 md:mt-32"
       }  w-full flex bg-#FFAF00`}
     >
@@ -15,7 +15,7 @@ export default function Footer() {
         Copyright @ {new Date().getFullYear()} Dewe Tour - Sabrina - DW1792A1Z.
         All rights reserved
       </div>
-      <div className="absolute hidden md:block bottom-0 right-0">
+      <div className="absolute hidden lg:block bottom-0 right-0">
         <img src={leaf} alt="leaf" />
       </div>
     </div>

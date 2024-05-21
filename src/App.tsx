@@ -4,6 +4,8 @@ import HomePage from "./pages";
 import DetailTripPage from "./pages/detail-trip";
 import PaymentPage from "./pages/payment";
 import UserProfilePage from "./pages/user-profile";
+import AdminTripListPage from "./pages/admin-trip-list";
+import AddTripPage from "./pages/add-trip";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path="/trip/:id" Component={DetailTripPage} />
         <Route path="/payment" Component={PaymentPage} />
         <Route path="/profile" Component={UserProfilePage} />
+        <Route path="/admin-trip-list" Component={AdminTripListPage} />
+        <Route path="/add-trip" Component={AddTripPage} />
       </Routes>
     </Router>
   );

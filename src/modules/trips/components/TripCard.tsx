@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import styles from "./styles/trip.module.css";
+import styles from "./styles/trip-card.module.css";
 
 type TripProps = {
   id: number;
@@ -14,7 +14,7 @@ export default function TripCard({ trip }: { trip: TripProps }) {
   const navigate = useNavigate();
 
   const clickDetail = (id: number) => {
-    navigate(`trip/${id}`);
+    navigate(`/trip/${id}`);
   };
   return (
     <section

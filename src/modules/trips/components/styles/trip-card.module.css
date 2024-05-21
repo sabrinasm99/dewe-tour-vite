@@ -1,0 +1,27 @@
+.card-container {
+  @apply bg-white rounded-md p-2 relative cursor-pointer;
+}
+
+.card-img {
+  @apply w-full;
+}
+
+.card-title {
+  @apply text-black font-medium mt-1;
+}
+
+.price-and-place-container {
+  @apply flex flex-col sm:flex-row mt-2;
+}
+
+.card-price {
+  @apply font-medium sm:w-1/2 text-#FFAF00;
+}
+
+.card-place {
+  @apply font-medium sm:w-1/2 text-sm text-right text-#878787;
+}
+
+.card-quota {
+  @apply absolute bg-white text-black font-bold rounded-sm text-xs py-1 px-2 top-6 right-0;
+}

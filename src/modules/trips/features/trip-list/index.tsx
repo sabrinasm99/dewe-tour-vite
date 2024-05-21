@@ -1,5 +1,5 @@
 import { tripList } from "../../../../fakedata";
-import TripCard from "./TripCard";
+import TripCard from "../../components/TripCard";
 import styles from "./styles/trip.module.css";
 
 export default function TripList() {

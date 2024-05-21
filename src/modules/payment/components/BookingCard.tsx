@@ -22,9 +22,10 @@ export default function BookingCard({ addedStyles }: { addedStyles?: string }) {
     fileInput.current?.click();
   };
 
-  const handleChangeImage = (e: any) => {
-    let file = e.target.files[0];
-    if (file) {
+  const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let files = e.target.files;
+    if (files && files[0]) {
+      const file = files[0];
       let changedImage = {
         fileObj: file,
         fileUrl: URL.createObjectURL(file),

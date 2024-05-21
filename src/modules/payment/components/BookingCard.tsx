@@ -1,9 +1,10 @@
 import { useState, useRef } from "react";
+import { twMerge } from "tailwind-merge";
 import icon2 from "../../shared/images/icon2.svg";
 import PaymentConfirmation from "./PaymentConfirmation";
 import PaymentProofModal from "./PaymentProofModal";
 
-export default function BookingCard() {
+export default function BookingCard({ addedStyles }: { addedStyles?: string }) {
   const [image, setImage] = useState<{
     fileObj: File | null;
     fileUrl: string;
@@ -22,9 +23,7 @@ export default function BookingCard() {
   };
 
   const handleChangeImage = (e: any) => {
-    console.log("masuk");
     let file = e.target.files[0];
-    console.log(Boolean(file), file, e.target.files);
     if (file) {
       let changedImage = {
         fileObj: file,
@@ -45,7 +44,12 @@ export default function BookingCard() {
 
   return (
     <>
-      <div className="w-90% xl:w-3/4 h-auto flex flex-col relative z-10 py-3 xl:py-0">
+      <div
+        className={twMerge(
+          "w-90% xl:w-3/4 h-auto flex flex-col relative z-10 py-3 xl:py-0",
+          addedStyles
+        )}
+      >
         <div
           className={`${
             location.pathname === "/profile" ? "mt-8" : "mt-0"
@@ -149,14 +153,7 @@ export default function BookingCard() {
                     backgroundColor: "lightgray",
                   }}
                 >
-                  <span
-                    style={{
-                      color: "grey",
-                      letterSpacing: "1px",
-                      fontWeight: 400,
-                    }}
-                    className="px-1 text-sm"
-                  >
+                  <span className="px-1 text-sm tracking-widest text-#808080">
                     NO PAYMENT PROOF
                   </span>
                 </div>
@@ -175,9 +172,9 @@ export default function BookingCard() {
                   className="hidden"
                   accept="image/*"
                 />
-                <p className="inline ml-1 w-1/2">
-                  {image.fileObj && image.fileObj.name.split(".")[0].length > 8
-                    ? image.fileObj.name.slice(0, 8) +
+                <p className="inline ml-1">
+                  {image.fileObj && image.fileObj.name.split(".")[0].length > 5
+                    ? image.fileObj.name.slice(0, 5) +
                       "..." +
                       image.fileObj?.name.split(".")[1]
                     : image.fileObj?.name}

@@ -27,7 +27,7 @@ export default function HeaderHome() {
                 <div className="flex items-center ml-auto mr-2">
                   <button
                     onClick={() => setShowLoginModal(true)}
-                    className="border border-white px-2 py-1 md:py-1 md:px-6 font-medium text-sm rounded-md"
+                    className="border border-white px-3 py-1 xl:py-1 xl:px-6 font-medium text-sm rounded-md"
                   >
                     Login
                   </button>
@@ -35,7 +35,7 @@ export default function HeaderHome() {
                 <div className="flex items-center">
                   <button
                     onClick={() => setShowRegisterModal(true)}
-                    className="px-2 py-1 md:py-1 md:px-6 font-medium border text-sm rounded-md bg-#FFAF00 border-#FFAF00"
+                    className="px-3 py-1 xl:py-1 xl:px-6 font-medium border text-sm rounded-md bg-#FFAF00 border-#FFAF00"
                   >
                     Register
                   </button>

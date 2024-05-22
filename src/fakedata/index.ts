@@ -89,3 +89,48 @@ export const tripList = [
     code: "10/15",
   },
 ];
+
+export const transactionList = [
+  {
+    id: 1,
+    name: "John Doe",
+    trip: "6D/4N Fun Tassie Vaca ...",
+    attachment: "bca.jpg",
+    status: "Waiting Payment",
+  },
+  {
+    id: 2,
+    name: "Haris Rahman",
+    trip: "6D/4N Exciting Summer...",
+    attachment: "bni.jpg",
+    status: "Approve",
+  },
+  {
+    id: 3,
+    name: "Amin Subagiyo",
+    trip: "6D/4N Fun Tassie Vaca ...",
+    attachment: "permata.jpg",
+    status: "Waiting Approve",
+  },
+  {
+    id: 4,
+    name: "Haris Astina",
+    trip: "6D/4N Wonderful Autum ...",
+    attachment: "permata.jpg",
+    status: "Waiting Approve",
+  },
+  {
+    id: 5,
+    name: "Philip Lamp",
+    trip: "6D/4N Magic Tokyo ...",
+    attachment: "bi.jpg",
+    status: "Waiting Payment",
+  },
+  {
+    id: 6,
+    name: "Max Stone",
+    trip: "6D/4N Labuan Bajo ...",
+    attachment: "bni.jpg",
+    status: "Approve",
+  },
+];

@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 import icon2 from "../../shared/images/icon2.svg";
 import PaymentConfirmation from "./PaymentConfirmation";
 import PaymentProofModal from "./PaymentProofModal";
+import { useLocation } from "react-router-dom";
 
 export default function BookingCard({ addedStyles }: { addedStyles?: string }) {
   const [image, setImage] = useState<{
@@ -15,6 +16,8 @@ export default function BookingCard({ addedStyles }: { addedStyles?: string }) {
   const [showPaymentConfirm, setShowPaymentConfirm] = useState(false);
   const [showPaymentProof, setShowPaymentProof] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState("Waiting Payment");
+
+  const { pathname } = useLocation();
 
   const fileInput = useRef<HTMLInputElement>(null);
 
@@ -54,8 +57,7 @@ export default function BookingCard({ addedStyles }: { addedStyles?: string }) {
         <div
           className={`${
             location.pathname === "/profile" ? "mt-8" : "mt-0"
-          } bg-white rounded border-2 py-2 px-4`}
-          style={{ borderColor: "#B7B7B7" }}
+          } bg-white rounded border-2 py-2 px-4 border-#B7B7B7`}
         >
           <div className="flex">
             <img src={icon2} className="w-36 sm:w-auto" />
@@ -64,10 +66,7 @@ export default function BookingCard({ addedStyles }: { addedStyles?: string }) {
             </div>
           </div>
           <div className="flex">
-            <h4
-              className="text-sm sm:text-base lg:ml-auto"
-              style={{ color: "#878787" }}
-            >
+            <h4 className="text-sm sm:text-base lg:ml-auto text-#878787">
               Monday, 22 July 2024
             </h4>
           </div>
@@ -76,24 +75,15 @@ export default function BookingCard({ addedStyles }: { addedStyles?: string }) {
               <div className="w-full lg:w-1/2">
                 <h2 className="text-xl font-bold">6D/4N Fun Tassie Vacation</h2>
 
-                <h4 className="text-sm" style={{ color: "#959595" }}>
-                  Australia
-                </h4>
+                <h4 className="text-sm text-#959595">Australia</h4>
                 <div
                   className={`${
                     paymentStatus === "Approve"
-                      ? "bg-green-100"
+                      ? "bg-green-100 text-#0BDC5F"
                       : paymentStatus === "Waiting Approve"
-                      ? "bg-orange-100"
-                      : "bg-red-100"
+                      ? "bg-orange-100 text-#FF9900"
+                      : "bg-red-100 text-#EC7A7A"
                   } mt-2 lg:mt-5 text-sm py-1 w-1/2 sm:w-1/3 text-center rounded`}
-                  style={
-                    paymentStatus === "Approve"
-                      ? { color: "#0BDC5F" }
-                      : paymentStatus === "Waiting Approve"
-                      ? { color: "#FF9900" }
-                      : { color: "#EC7A7A" }
-                  }
                 >
                   {paymentStatus}
                 </div>
@@ -101,29 +91,21 @@ export default function BookingCard({ addedStyles }: { addedStyles?: string }) {
               <div className="w-full flex flex-row lg:flex-col lg:w-1/4 mt-2 lg:mt-0">
                 <div className="w-1/2 lg:w-full">
                   <h2 className="ml-auto font-bold">Date Trip</h2>
-                  <h4 className="text-sm" style={{ color: "#959595" }}>
-                    26 August 2024
-                  </h4>
+                  <h4 className="text-sm text-#959595">26 August 2024</h4>
                 </div>
                 <div className="w-1/2 lg:w-full">
                   <h2 className="font-bold lg:mt-5">Accomodation</h2>
-                  <h4 className="text-sm" style={{ color: "#959595" }}>
-                    Hotel 4 Nights
-                  </h4>
+                  <h4 className="text-sm text-#959595">Hotel 4 Nights</h4>
                 </div>
               </div>
               <div className="w-full flex flex-row lg:flex-col lg:w-1/4 mt-1 lg:mt-0">
                 <div className="w-1/2 lg:w-full">
                   <h2 className="font-bold">Duration</h2>
-                  <h4 className="text-sm" style={{ color: "#959595" }}>
-                    6 Days 4 Nights
-                  </h4>
+                  <h4 className="text-sm text-#959595">6 Days 4 Nights</h4>
                 </div>
                 <div className="w-1/2 lg:w-full">
                   <h2 className="font-bold lg:mt-5">Transportation</h2>
-                  <h4 className="text-sm" style={{ color: "#959595" }}>
-                    Qatar Airways
-                  </h4>
+                  <h4 className="text-sm text-#959595">Qatar Airways</h4>
                 </div>
               </div>
             </div>
@@ -132,10 +114,7 @@ export default function BookingCard({ addedStyles }: { addedStyles?: string }) {
                 <div className="w-full h-44 lg:h-32 relative group">
                   <img
                     src={image.fileUrl}
-                    className="w-full h-full object-cover border"
-                    style={{
-                      borderColor: "lightgray",
-                    }}
+                    className="w-full h-full object-cover border border-#D3D3D3"
                     alt="image"
                   />
                   <div className="absolute hover:bg-backdrop inset-0 flex justify-center items-center">
@@ -148,12 +127,7 @@ export default function BookingCard({ addedStyles }: { addedStyles?: string }) {
                   </div>
                 </div>
               ) : (
-                <div
-                  className="flex justify-center items-center text-center h-44 lg:h-32"
-                  style={{
-                    backgroundColor: "lightgray",
-                  }}
-                >
+                <div className="flex justify-center items-center text-center h-44 lg:h-32 bg-#D3D3D3">
                   <span className="px-1 text-sm tracking-widest text-#808080">
                     NO PAYMENT PROOF
                   </span>
@@ -162,7 +136,9 @@ export default function BookingCard({ addedStyles }: { addedStyles?: string }) {
               <div className="flex mt-1 lg:mt-2">
                 <button
                   onClick={handleClick}
-                  className="border border-black rounded w-1/3 lg:w-auto py-1 px-2 text-sm font-medium"
+                  className={`${
+                    pathname === "/transaction-list" ? "hidden" : "block"
+                  } border border-black rounded w-1/3 lg:w-auto py-1 px-2 text-sm font-medium`}
                 >
                   {image.fileUrl ? "Change" : "Upload"} File
                 </button>
@@ -191,10 +167,7 @@ export default function BookingCard({ addedStyles }: { addedStyles?: string }) {
           </h5>
         </div> */}
           <div className="flex flex-row lg:flex-col mt-2 lg:mt-0">
-            <div
-              className="flex lg:border-b-2 w-1/2 lg:w-full lg:pb-2"
-              style={{ borderColor: "rgba(183, 183, 183, 0.5)" }}
-            >
+            <div className="flex lg:border-b-2 w-1/2 lg:w-full lg:pb-2 border-bookingCard">
               <div className="w-full lg:w-2/3 flex flex-col lg:flex-row">
                 <h2 className="lg:w-1/4 font-bold">ID Order</h2>
                 <h2 className="lg:w-1/4 font-bold">Full Name</h2>
@@ -202,16 +175,8 @@ export default function BookingCard({ addedStyles }: { addedStyles?: string }) {
                 <h2 className="lg:w-1/4 font-bold">Phone</h2>
               </div>
             </div>
-            <div
-              className="lg:border-b-2 flex lg:py-1 w-1/2 lg:w-full"
-              style={{
-                borderColor: "rgba(183, 183, 183, 0.5)",
-              }}
-            >
-              <div
-                className="flex flex-col lg:flex-row w-full lg:w-2/3"
-                style={{ color: "#B1B1B1" }}
-              >
+            <div className="lg:border-b-2 flex lg:py-1 w-1/2 lg:w-full border-bookingCard">
+              <div className="flex flex-col lg:flex-row w-full lg:w-2/3 text-#B1B1B1">
                 <h2 className="lg:w-1/4">1</h2>
                 <h2 className="lg:w-1/4">John Doe</h2>
                 <h2 className="lg:w-1/4">Male</h2>
@@ -232,43 +197,36 @@ export default function BookingCard({ addedStyles }: { addedStyles?: string }) {
             <div className="flex w-full pt-1 lg:pt-0">
               <h2 className="w-1/2">Total</h2>
               <h2 className="w-1/2">
-                :{" "}
-                <p className="inline" style={{ color: "#FF0000" }}>
-                  IDR. 12,398,000
-                </p>
+                : <p className="inline text-#FF0000">IDR. 12,398,000</p>
               </h2>
             </div>
           </div>
-          {/* <div
-          className={`${
-            location.pathname === "/list-transaction" &&
-            detail.status === "Waiting Approve"
-              ? "flex"
-              : "hidden"
-          } mt-5 text-white`}
-        >
-          <div className="ml-auto">
-            <button
-              // onClick={() => setShowModalApprove(false)}
-              className="px-3 py-1 font-semibold rounded mr-3"
-              style={{ backgroundColor: "#FF0742" }}
-            >
-              Cancel
-            </button>
-            <button
-              // onClick={() => clickApprove(detail.id)}
-              className="px-3 py-1 font-semibold rounded"
-              style={{ backgroundColor: "#0ACF83" }}
-            >
-              Approve
-            </button>
+          <div
+            className={`${
+              pathname === "/transaction-list" ? "flex" : "hidden"
+            } mt-5 text-white`}
+          >
+            <div className="ml-auto">
+              <button
+                // onClick={() => setShowModalApprove(false)}
+                className="px-3 py-1 font-semibold rounded mr-3 bg-#FF0742"
+              >
+                Cancel
+              </button>
+              <button
+                // onClick={() => clickApprove(detail.id)}
+                className="px-3 py-1 font-semibold rounded bg-#0ACF83"
+              >
+                Approve
+              </button>
+            </div>
           </div>
-        </div> */}
         </div>
         <button
           onClick={() => clickPay()}
-          className={`ml-auto rounded px-16 py-2 text-white text-sm font-semibold lg:mb-10 xl:mb-0`}
-          style={{ backgroundColor: "#FFAF00", marginTop: "20.5px" }}
+          className={`${
+            pathname === "/transaction-list" ? "hidden" : "block"
+          } ml-auto rounded px-16 py-2 text-white text-sm font-semibold lg:mb-10 xl:mb-0 bg-#FFAF00 mt-20.5px`}
         >
           PAY
         </button>

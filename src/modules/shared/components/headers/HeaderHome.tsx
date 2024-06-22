@@ -3,11 +3,17 @@ import icon from "../../images/icon.svg";
 import { FaUserCircle } from "react-icons/fa";
 import RegisterModal from "../modals/RegisterModal";
 import LoginModal from "../modals/LoginModal";
+import CustomerDropdown from "../drop-down/CustomerDropdown";
+import AdminDropdown from "../drop-down/AdminDropdown";
 
 export default function HeaderHome() {
   const [search, setSearch] = useState("");
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showCustomerDropdown, setShowCustomerDropdown] = useState(false);
+  const [showAdminDropdown, setShowAdminDropdown] = useState(false);
+  const isLogin = false;
+  const isAdmin = false;
 
   const handleSearch = (e: any) => {
     setSearch(e.target.value);
@@ -18,9 +24,28 @@ export default function HeaderHome() {
         <div className="px-4 md:px-8 lg:px-10 xl:px-16">
           <div className="flex">
             <img src={icon} className="w-40 sm:w-auto" />
-            {localStorage.email ? (
-              <div className="ml-auto flex items-center">
-                <FaUserCircle className="text-gray-700 bg-white rounded-full border-2 cursor-pointer border-#FFAF00 w-44px h-44px" />
+            {localStorage.email || isLogin ? (
+              <div className="relative ml-auto flex items-center">
+                <FaUserCircle
+                  onClick={() =>
+                    isAdmin
+                      ? setShowAdminDropdown(!showAdminDropdown)
+                      : setShowCustomerDropdown(!showCustomerDropdown)
+                  }
+                  className="text-gray-700 bg-white rounded-full border-2 cursor-pointer border-#FFAF00 w-44px h-44px"
+                />
+                {showCustomerDropdown && (
+                  <CustomerDropdown
+                    showCustomerDropdown={showCustomerDropdown}
+                    setShowCustomerDropdown={setShowCustomerDropdown}
+                  />
+                )}
+                {showAdminDropdown && (
+                  <AdminDropdown
+                    showAdminDropdown={showAdminDropdown}
+                    setShowAdminDropdown={setShowAdminDropdown}
+                  />
+                )}
               </div>
             ) : (
               <>

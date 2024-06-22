@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { tripList } from "../../../../fakedata";
 import hotel from "../../../shared/images/hotel.svg";
 import meal from "../../../shared/images/meal.svg";
@@ -13,6 +13,7 @@ import { useState } from "react";
 
 export default function DetailTrip() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const trip = tripList.find((trip) => trip.id === Number(id));
 
@@ -153,7 +154,10 @@ export default function DetailTrip() {
         </div>
       </div>
       <div className="px-2 mt-4">
-        <button className="text-white text-sm flex ml-auto px-8 py-1 font-semibold rounded focus:outline-none bg-#FFAF00">
+        <button
+          onClick={() => navigate(`/payment/${1}`)}
+          className="text-white text-sm flex ml-auto px-8 py-1 font-semibold rounded focus:outline-none bg-#FFAF00"
+        >
           BOOK NOW
         </button>
       </div>

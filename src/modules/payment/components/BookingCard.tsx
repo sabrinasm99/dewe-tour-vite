@@ -225,7 +225,10 @@ export default function BookingCard({ addedStyles }: { addedStyles?: string }) {
         <button
           onClick={() => clickPay()}
           className={`${
-            pathname === "/transaction-list" ? "hidden" : "block"
+            pathname === "/transaction-list" ||
+            paymentStatus !== "Waiting Payment"
+              ? "hidden"
+              : "block"
           } ml-auto rounded px-16 py-2 text-white text-sm font-semibold lg:mb-10 xl:mb-0 bg-#FFAF00 mt-20.5px`}
         >
           PAY

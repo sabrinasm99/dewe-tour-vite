@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" Component={HomePage} />;
         <Route path="/trip/:id" Component={DetailTripPage} />
-        <Route path="/payment" Component={PaymentPage} />
+        <Route path="/payment/:id" Component={PaymentPage} />
         <Route path="/profile" Component={UserProfilePage} />
         <Route path="/admin-trip-list" Component={AdminTripListPage} />
         <Route path="/add-trip" Component={AddTripPage} />

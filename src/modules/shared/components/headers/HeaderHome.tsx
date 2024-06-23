@@ -12,8 +12,8 @@ export default function HeaderHome() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showCustomerDropdown, setShowCustomerDropdown] = useState(false);
   const [showAdminDropdown, setShowAdminDropdown] = useState(false);
-  const isLogin = false;
-  const isAdmin = false;
+  const isLogin = true;
+  const isAdmin = true;
 
   const handleSearch = (e: any) => {
     setSearch(e.target.value);
@@ -32,7 +32,7 @@ export default function HeaderHome() {
                       ? setShowAdminDropdown(!showAdminDropdown)
                       : setShowCustomerDropdown(!showCustomerDropdown)
                   }
-                  className="text-gray-700 bg-white rounded-full border-2 cursor-pointer border-#FFAF00 w-44px h-44px"
+                  className="text-gray-700 bg-white rounded-full border-2 cursor-pointer border-#FFAF00 w-40px h-40px sm:w-44px sm:h-44px"
                 />
                 {showCustomerDropdown && (
                   <CustomerDropdown

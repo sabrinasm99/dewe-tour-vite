@@ -16,12 +16,15 @@ export default {
         "40%": "40%",
         "50%": "50%",
         "100px": "100px",
+        "75px": "75px",
+        "60px": "60px",
       },
       height: {
         "535.4px": "535.4px",
         "450px": "450px",
         "68px": "68px",
         "44px": "44px",
+        "40px": "40px",
       },
       fontSize: {
         "60px": "60px",
@@ -43,6 +46,7 @@ export default {
         "20%": "20%",
         "350px": "350px",
         "44px": "44px",
+        "40px": "40px",
       },
       textColor: {
         "#FFAF00": "#FFAF00",

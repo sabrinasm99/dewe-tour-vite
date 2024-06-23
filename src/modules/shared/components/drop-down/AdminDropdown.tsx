@@ -14,10 +14,7 @@ export default function AdminDropdown({
 
   return (
     <>
-      <div
-        className={`absolute bg-white py-3 rounded font-bold shadow-md text-black z-30 right-0 w-36`}
-        style={{ top: "75px" }}
-      >
+      <div className="absolute bg-white py-3 rounded font-bold shadow-md text-black z-30 right-0 w-36 top-60px sm:top-75px">
         <div className="border-b-2">
           <div
             onClick={() => {

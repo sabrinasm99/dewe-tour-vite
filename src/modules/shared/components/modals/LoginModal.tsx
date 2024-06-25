@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import hibiscusmodal from "../../images/hibiscusmodal.svg";
 import palmmodal from "../../images/palmmodal.svg";
+import { useLogin } from "../../../users/api";
 
 export default function LoginModal({
   setShowLoginModal,
@@ -9,10 +10,25 @@ export default function LoginModal({
   setShowLoginModal: React.Dispatch<boolean>;
   setShowRegisterModal: React.Dispatch<boolean>;
 }) {
+  const [input, setInput] = useState({ email: "", password: "" });
+
   const clickHere = () => {
     setShowLoginModal(false);
     setShowRegisterModal(true);
   };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+
+  const loginMutation = useLogin();
+
+  const submitLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    loginMutation.mutate({ ...input });
+  };
+
   return (
     <>
       <div className="fixed rounded-md py-3 px-6 z-30 bg-white top-50% left-50% -translate-x-50% -translate-y-50% w-350px shadow-modal">
@@ -25,8 +41,8 @@ export default function LoginModal({
             className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
             type="text"
             name="email"
-            // value={inputLogin.email}
-            // onChange={handleChangeLogin}
+            value={input.email}
+            onChange={handleChange}
           />
         </div>
         <div className="mt-5">
@@ -35,13 +51,13 @@ export default function LoginModal({
             className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
             type="password"
             name="password"
-            // value={inputLogin.password}
-            // onChange={handleChangeLogin}
+            value={input.password}
+            onChange={handleChange}
           />
         </div>
         <div className="mt-8">
           <button
-            // onClick={submitLogin}
+            onClick={submitLogin}
             className="w-full p-1 px-3 bg-purple-800 text-white focus:outline-none border rounded font-bold"
             style={{ backgroundColor: "#FFAF00", borderColor: "#FFAF00" }}
           >

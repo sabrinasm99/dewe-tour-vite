@@ -1,12 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import hibiscusmodal from "../../images/hibiscusmodal.svg";
 import palmmodal from "../../images/palmmodal.svg";
+import { useRegister } from "../../../users/api";
 
 export default function RegisterModal({
   setShowRegisterModal,
 }: {
   setShowRegisterModal: React.Dispatch<boolean>;
 }) {
+  const [input, setInput] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+    address: "",
+    gender: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+
+  const registerMutation = useRegister();
+
+  const submitRegister = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    registerMutation.mutate({ ...input });
+  };
+
   return (
     <>
       <div className="fixed rounded-md py-3 px-6 z-30 bg-white top-50% left-50% -translate-x-50% -translate-y-50% w-350px shadow-modal">
@@ -19,8 +45,8 @@ export default function RegisterModal({
             className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
             type="text"
             name="fullName"
-            // value={inputRegister.fullName}
-            // onChange={handleChangeRegister}
+            value={input.name}
+            onChange={handleChange}
           />
           {/* <h3 className="text-red-600 text-sm">{warning}</h3> */}
         </div>
@@ -30,8 +56,8 @@ export default function RegisterModal({
             className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
             type="email"
             name="email"
-            // value={inputRegister.email}
-            // onChange={handleChangeRegister}
+            value={input.email}
+            onChange={handleChange}
           />
         </div>
         <div className="mt-4">
@@ -40,8 +66,8 @@ export default function RegisterModal({
             className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
             type="password"
             name="password"
-            // value={inputRegister.password}
-            // onChange={handleChangeRegister}
+            value={input.password}
+            onChange={handleChange}
           />
         </div>
         <div className="mt-4">
@@ -50,20 +76,20 @@ export default function RegisterModal({
             className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
             type="number"
             name="phone"
-            // value={inputRegister.phone}
-            // onChange={handleChangeRegister}
+            value={input.phone}
+            onChange={handleChange}
           />
         </div>
         <div className="mt-4">
           <label className="text-black block font-bold">Gender</label>
           <select
             name="gender"
-            // value={inputRegister.gender}
+            value={input.gender}
             className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
-            // onChange={handleChangeRegister}
+            onChange={handleChange}
           >
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
           </select>
         </div>
         <div className="mt-4">
@@ -71,13 +97,13 @@ export default function RegisterModal({
           <textarea
             className="text-gray-800 w-full border pl-1 focus:outline-none rounded max-h-100px bg-#D2D2D240"
             name="address"
-            // value={inputRegister.address}
-            // onChange={handleChangeRegister}
+            value={input.address}
+            onChange={handleChange}
           />
         </div>
         <div className="mt-8 mb-3">
           <button
-            // onClick={submitRegister}
+            onClick={submitRegister}
             className="w-full p-1 px-3 bg-purple-800 text-white focus:outline-none border rounded font-bold"
             style={{ backgroundColor: "#FFAF00", borderColor: "#FFAF00" }}
           >

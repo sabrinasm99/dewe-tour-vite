@@ -8,6 +8,7 @@ import AdminTripListPage from "./pages/admin-trip-list";
 import AddTripPage from "./pages/add-trip";
 import TransactionListPage from "./pages/transaction-list";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ScrollToTop from "./modules/shared/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -15,15 +16,17 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <Routes>
-          <Route path="/" Component={HomePage} />;
-          <Route path="/trip/:id" Component={DetailTripPage} />
-          <Route path="/payment/:id" Component={PaymentPage} />
-          <Route path="/profile" Component={UserProfilePage} />
-          <Route path="/admin-trip-list" Component={AdminTripListPage} />
-          <Route path="/add-trip" Component={AddTripPage} />
-          <Route path="/transaction-list" Component={TransactionListPage} />
-        </Routes>
+        <ScrollToTop>
+          <Routes>
+            <Route path="/" Component={HomePage} />;
+            <Route path="/trip/:id" Component={DetailTripPage} />
+            <Route path="/payment/:id" Component={PaymentPage} />
+            <Route path="/profile" Component={UserProfilePage} />
+            <Route path="/admin-trip-list" Component={AdminTripListPage} />
+            <Route path="/add-trip" Component={AddTripPage} />
+            <Route path="/transaction-list" Component={TransactionListPage} />
+          </Routes>
+        </ScrollToTop>
       </Router>
     </QueryClientProvider>
   );

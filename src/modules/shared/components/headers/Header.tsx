@@ -1,19 +1,30 @@
 import { Link } from "react-router-dom";
 import icon from "../../images/icon.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RegisterModal from "../modals/RegisterModal";
 import LoginModal from "../modals/LoginModal";
 import { FaUserCircle } from "react-icons/fa";
 import CustomerDropdown from "../drop-down/CustomerDropdown";
 import AdminDropdown from "../drop-down/AdminDropdown";
+import { useCheckIsAdmin } from "../../../users/api/checkIsAdmin";
+import { useUserStore } from "../../../../store/useUserStore";
 
 export default function Header() {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showCustomerDropdown, setShowCustomerDropdown] = useState(false);
   const [showAdminDropdown, setShowAdminDropdown] = useState(false);
-  const isLogin = true;
-  const isAdmin = false;
+  const userId = useUserStore((state: any) => state.userId);
+  const {
+    data: isAdmin,
+    isLoading: isLoadingCheckIsAdmin,
+    isError: isErrorCheckIsAdmin,
+    refetch: refetchCheckIsAdmin,
+  } = useCheckIsAdmin();
+
+  useEffect(() => {
+    refetchCheckIsAdmin();
+  }, [userId]);
 
   return (
     <div className="relative w-full text-white h-68px">
@@ -22,7 +33,7 @@ export default function Header() {
         <Link to="/" className="flex items-center">
           <img src={icon} className="w-40 xl:w-auto" />
         </Link>
-        {isLogin ? (
+        {!isLoadingCheckIsAdmin && !isErrorCheckIsAdmin && userId && (
           <div className="relative ml-auto flex items-center">
             <FaUserCircle
               onClick={() =>
@@ -45,7 +56,8 @@ export default function Header() {
               />
             )}
           </div>
-        ) : (
+        )}
+        {(isErrorCheckIsAdmin || !userId) && (
           <>
             <div className="flex items-center ml-auto mr-2">
               <button

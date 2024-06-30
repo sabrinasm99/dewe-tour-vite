@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import icon from "../../images/icon.svg";
 import { FaUserCircle } from "react-icons/fa";
 import RegisterModal from "../modals/RegisterModal";
 import LoginModal from "../modals/LoginModal";
 import CustomerDropdown from "../drop-down/CustomerDropdown";
 import AdminDropdown from "../drop-down/AdminDropdown";
+import { useCheckIsAdmin } from "../../../users/api/checkIsAdmin";
+import { useUserStore } from "../../../../store/useUserStore";
 
 export default function HeaderHome() {
   const [search, setSearch] = useState("");
@@ -12,19 +14,29 @@ export default function HeaderHome() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showCustomerDropdown, setShowCustomerDropdown] = useState(false);
   const [showAdminDropdown, setShowAdminDropdown] = useState(false);
-  const isLogin = true;
-  const isAdmin = true;
+  const userId = useUserStore((state: any) => state.userId);
+  const {
+    data: isAdmin,
+    isLoading: isLoadingCheckIsAdmin,
+    isError: isErrorCheckIsAdmin,
+    refetch: refetchCheckIsAdmin,
+  } = useCheckIsAdmin();
+
+  useEffect(() => {
+    refetchCheckIsAdmin();
+  }, [userId]);
 
   const handleSearch = (e: any) => {
     setSearch(e.target.value);
   };
+
   return (
     <>
       <div className="w-full text-white h-450px md:h-535.4px bg-pantai bg-no-repeat bg-cover">
         <div className="px-4 md:px-8 lg:px-10 xl:px-16">
           <div className="flex">
             <img src={icon} className="w-40 sm:w-auto" />
-            {localStorage.email || isLogin ? (
+            {!isLoadingCheckIsAdmin && !isErrorCheckIsAdmin && userId && (
               <div className="relative ml-auto flex items-center">
                 <FaUserCircle
                   onClick={() =>
@@ -47,7 +59,8 @@ export default function HeaderHome() {
                   />
                 )}
               </div>
-            ) : (
+            )}
+            {(isErrorCheckIsAdmin || !userId) && (
               <>
                 <div className="flex items-center ml-auto mr-2">
                   <button

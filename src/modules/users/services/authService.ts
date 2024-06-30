@@ -1,32 +1,48 @@
-type TokenType = "access-token" | "refresh-token";
+type FieldType = "access-token" | "user-id";
 
 export interface IAuthService {
   isAuthenticated(): boolean;
-  getToken(tokenType: TokenType): string | null;
-  setToken(tokenType: TokenType, token: string): void;
-  removeToken(tokenType: TokenType): void;
+  getToken(fieldType: FieldType): string | null;
+  setToken(fieldType: FieldType, token: string): void;
+  removeToken(fieldType: FieldType): void;
+  getUserId(fieldType: FieldType): string | null;
+  setUserId(fieldType: FieldType, userId: string): void;
+  removeUserId(fieldType: FieldType): void;
 }
 
 export class AuthService implements IAuthService {
   public accessToken: string | null;
-  public refreshToken: string | null;
+  public userId: string | null;
 
   constructor() {
     this.accessToken = this.getToken("access-token");
-    this.refreshToken = this.getToken("refresh-token");
+    this.userId = this.getUserId("user-id");
   }
 
-  public getToken(tokenType: TokenType): string | null {
-    const token = localStorage.getItem(tokenType);
+  public getToken(fieldType: FieldType): string | null {
+    const token = localStorage.getItem(fieldType);
     return token ? token : null;
   }
 
-  public setToken(tokenType: TokenType, token: string): void {
-    localStorage.setItem(tokenType, token);
+  public setToken(fieldType: FieldType, token: string): void {
+    localStorage.setItem(fieldType, token);
   }
 
-  public removeToken(tokenType: TokenType): void {
-    localStorage.removeItem(tokenType);
+  public getUserId(fieldType: FieldType): string | null {
+    const userId = localStorage.getItem(fieldType);
+    return userId ? userId : null;
+  }
+
+  public setUserId(fieldType: FieldType, userId: string): void {
+    localStorage.setItem(fieldType, userId);
+  }
+
+  public removeToken(fieldType: FieldType): void {
+    localStorage.removeItem(fieldType);
+  }
+
+  public removeUserId(fieldType: FieldType): void {
+    localStorage.removeItem(fieldType);
   }
 
   isAuthenticated(): boolean {

@@ -10,6 +10,7 @@ export class UserService extends BaseAPI {
     try {
       const result = await this.post("/register", data);
       this.authService.setToken("access-token", result.data.data.token);
+      this.authService.setUserId("user-id", result.data.data.id);
       return result;
     } catch (error) {
       throw error;

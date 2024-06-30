@@ -27,10 +27,14 @@ export default function RegisterModal({
 
   const registerMutation = useRegister();
 
-  const submitRegister = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const submitRegister = (
+    e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
 
     registerMutation.mutate({ ...input });
+
+    setShowRegisterModal(false);
   };
 
   return (
@@ -39,77 +43,79 @@ export default function RegisterModal({
         <h1 className="text-black text-3xl font-bold mt-8 text-center">
           Register
         </h1>
-        <div className="mt-6">
-          <label className="text-black block font-bold">Full Name</label>
-          <input
-            className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
-            type="text"
-            name="fullName"
-            value={input.name}
-            onChange={handleChange}
-          />
-          {/* <h3 className="text-red-600 text-sm">{warning}</h3> */}
-        </div>
-        <div className="mt-4">
-          <label className="text-black block font-bold">Email</label>
-          <input
-            className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
-            type="email"
-            name="email"
-            value={input.email}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mt-4">
-          <label className="text-black block font-bold">Password</label>
-          <input
-            className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
-            type="password"
-            name="password"
-            value={input.password}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mt-4">
-          <label className="text-black block font-bold">Phone</label>
-          <input
-            className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
-            type="number"
-            name="phone"
-            value={input.phone}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mt-4">
-          <label className="text-black block font-bold">Gender</label>
-          <select
-            name="gender"
-            value={input.gender}
-            className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
-            onChange={handleChange}
-          >
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-        </div>
-        <div className="mt-4">
-          <label className="text-black block font-bold">Address</label>
-          <textarea
-            className="text-gray-800 w-full border pl-1 focus:outline-none rounded max-h-100px bg-#D2D2D240"
-            name="address"
-            value={input.address}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mt-8 mb-3">
-          <button
-            onClick={submitRegister}
-            className="w-full p-1 px-3 bg-purple-800 text-white focus:outline-none border rounded font-bold"
-            style={{ backgroundColor: "#FFAF00", borderColor: "#FFAF00" }}
-          >
-            Register
-          </button>
-        </div>
+        <form onSubmit={submitRegister}>
+          <div className="mt-6">
+            <label className="text-black block font-bold">Full Name</label>
+            <input
+              className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
+              type="text"
+              name="name"
+              value={input.name}
+              onChange={handleChange}
+            />
+            {/* <h3 className="text-red-600 text-sm">{warning}</h3> */}
+          </div>
+          <div className="mt-4">
+            <label className="text-black block font-bold">Email</label>
+            <input
+              className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
+              type="email"
+              name="email"
+              value={input.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mt-4">
+            <label className="text-black block font-bold">Password</label>
+            <input
+              className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
+              type="password"
+              name="password"
+              value={input.password}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mt-4">
+            <label className="text-black block font-bold">Phone</label>
+            <input
+              className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
+              type="text"
+              name="phone"
+              value={input.phone}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mt-4">
+            <label className="text-black block font-bold">Gender</label>
+            <select
+              name="gender"
+              value={input.gender}
+              className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
+              onChange={handleChange}
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div className="mt-4">
+            <label className="text-black block font-bold">Address</label>
+            <textarea
+              className="text-gray-800 w-full border pl-1 focus:outline-none rounded max-h-100px bg-#D2D2D240"
+              name="address"
+              value={input.address}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mt-8 mb-3">
+            <button
+              onClick={submitRegister}
+              className="w-full p-1 px-3 bg-purple-800 text-white focus:outline-none border rounded font-bold"
+              style={{ backgroundColor: "#FFAF00", borderColor: "#FFAF00" }}
+            >
+              Register
+            </button>
+          </div>
+        </form>
         <div className="absolute" style={{ top: 0, left: 0 }}>
           <img src={palmmodal} />
         </div>

@@ -38,15 +38,17 @@ export default function LoginModal({
         <h1 className="text-black text-3xl font-bold mt-8 text-center">
           Login
         </h1>
-        <form onSubmit={submitLogin} className="mt-12">
-          <label className="text-black block font-bold">Email</label>
-          <input
-            className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
-            type="text"
-            name="email"
-            value={input.email}
-            onChange={handleChange}
-          />
+        <form onSubmit={submitLogin}>
+          <div className="mt-12">
+            <label className="text-black block font-bold">Email</label>
+            <input
+              className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
+              type="text"
+              name="email"
+              value={input.email}
+              onChange={handleChange}
+            />
+          </div>
           <div className="mt-5">
             <label className="text-black block font-bold">Password</label>
             <input

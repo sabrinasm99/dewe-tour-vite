@@ -11,7 +11,6 @@ export default function LoginModal({
   setShowRegisterModal: React.Dispatch<boolean>;
 }) {
   const [input, setInput] = useState({ email: "", password: "" });
-
   const clickHere = () => {
     setShowLoginModal(false);
     setShowRegisterModal(true);
@@ -23,10 +22,14 @@ export default function LoginModal({
 
   const loginMutation = useLogin();
 
-  const submitLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const submitLogin = (
+    e: React.MouseEvent<HTMLButtonElement> | React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
 
     loginMutation.mutate({ ...input });
+
+    setShowLoginModal(false);
   };
 
   return (
@@ -35,7 +38,7 @@ export default function LoginModal({
         <h1 className="text-black text-3xl font-bold mt-8 text-center">
           Login
         </h1>
-        <div className="mt-12">
+        <form onSubmit={submitLogin} className="mt-12">
           <label className="text-black block font-bold">Email</label>
           <input
             className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
@@ -44,27 +47,27 @@ export default function LoginModal({
             value={input.email}
             onChange={handleChange}
           />
-        </div>
-        <div className="mt-5">
-          <label className="text-black block font-bold">Password</label>
-          <input
-            className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
-            type="password"
-            name="password"
-            value={input.password}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mt-8">
-          <button
-            onClick={submitLogin}
-            className="w-full p-1 px-3 bg-purple-800 text-white focus:outline-none border rounded font-bold"
-            style={{ backgroundColor: "#FFAF00", borderColor: "#FFAF00" }}
-          >
-            Login
-          </button>
-        </div>
-        <h3 className="text-sm mt-3 font-light" style={{ color: "#B1B1B1" }}>
+          <div className="mt-5">
+            <label className="text-black block font-bold">Password</label>
+            <input
+              className="text-gray-800 w-full border pl-1 focus:outline-none rounded bg-#D2D2D240"
+              type="password"
+              name="password"
+              value={input.password}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mt-8">
+            <button
+              onClick={submitLogin}
+              className="w-full p-1 px-3 bg-purple-800 text-white focus:outline-none border rounded font-bold"
+              style={{ backgroundColor: "#FFAF00", borderColor: "#FFAF00" }}
+            >
+              Login
+            </button>
+          </div>
+        </form>
+        <h3 className="text-sm mt-3 text-gray-500">
           Don't have an account? Click{" "}
           <p onClick={clickHere} className="font-bold inline cursor-pointer">
             Here

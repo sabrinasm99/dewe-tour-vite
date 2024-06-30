@@ -2,7 +2,9 @@ import user from "../../images/user.svg";
 import bill from "../../images/bill.svg";
 import triangle from "../../images/triangle.svg";
 import logout from "../../images/logout.svg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { userService } from "../../../users/services";
+import { useUserStore } from "../../../../store/useUserStore";
 
 export default function CustomerDropdown({
   showCustomerDropdown,
@@ -12,6 +14,22 @@ export default function CustomerDropdown({
   setShowCustomerDropdown: React.Dispatch<boolean>;
 }) {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const updateUserId = useUserStore((state: any) => state.updateUserId);
+
+  const pathnameRegex = /\/trip\/[0-9]+/g;
+
+  const clickLogout = async () => {
+    await userService.logout();
+
+    updateUserId("");
+
+    setShowCustomerDropdown(!showCustomerDropdown);
+
+    if (pathname !== "/" && !pathnameRegex.test(pathname)) {
+      navigate("/");
+    }
+  };
 
   return (
     <>
@@ -40,7 +58,7 @@ export default function CustomerDropdown({
         </div>
         <div
           className="flex py-1 px-5 cursor-pointer hover:bg-gray-200"
-          // onClick={submitLogout}
+          onClick={clickLogout}
         >
           <img src={logout} className="mr-2" />
           <h2>Logout</h2>

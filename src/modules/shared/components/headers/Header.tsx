@@ -30,7 +30,10 @@ export default function Header() {
     <div className="relative w-full text-white h-68px">
       <div className="absolute inset-0 bg-pantai blur-1.8px"></div>
       <div className="absolute px-2 xl:px-16 flex inset-0 text-white">
-        <Link to="/" className="flex items-center">
+        <Link
+          to={isAdmin ? "/admin-trip-list" : "/"}
+          className="flex items-center"
+        >
           <img src={icon} className="w-40 xl:w-auto" />
         </Link>
         {!isLoadingCheckIsAdmin && !isErrorCheckIsAdmin && userId && (

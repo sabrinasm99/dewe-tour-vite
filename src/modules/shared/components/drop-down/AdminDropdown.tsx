@@ -1,7 +1,9 @@
 import logout from "../../images/logout.svg";
 import journey from "../../images/journey.svg";
 import triangle from "../../images/triangle.svg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { userService } from "../../../users/services";
+import { useUserStore } from "../../../../store/useUserStore";
 
 export default function AdminDropdown({
   showAdminDropdown,
@@ -11,6 +13,18 @@ export default function AdminDropdown({
   setShowAdminDropdown: React.Dispatch<boolean>;
 }) {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const updateUserId = useUserStore((state: any) => state.updateUserId);
+
+  const clickLogout = async () => {
+    await userService.logout();
+
+    updateUserId("");
+
+    setShowAdminDropdown(!showAdminDropdown);
+
+    navigate("/");
+  };
 
   return (
     <>
@@ -19,17 +33,23 @@ export default function AdminDropdown({
           <div
             onClick={() => {
               setShowAdminDropdown(!showAdminDropdown);
-              navigate(`/admin-trip-list`);
+              const navTo =
+                pathname === "/transaction-list"
+                  ? "/admin-trip-list"
+                  : "/transaction-list";
+              navigate(navTo);
             }}
             className="flex py-1 px-5 cursor-pointer hover:bg-gray-200"
           >
             <img src={journey} className="mr-2" />
-            <h2 className="">Trip</h2>
+            <h2 className="">
+              {pathname === "/transaction-list" ? "Trip" : "Transaction"}
+            </h2>
           </div>
         </div>
         <div
           className="flex py-1 px-5 cursor-pointer hover:bg-gray-200"
-          // onClick={submitLogout}
+          onClick={clickLogout}
         >
           <img src={logout} className="mr-2" />
           <h2>Logout</h2>

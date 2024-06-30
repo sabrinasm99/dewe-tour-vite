@@ -9,6 +9,8 @@ import AddTripPage from "./pages/add-trip";
 import TransactionListPage from "./pages/transaction-list";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ScrollToTop from "./modules/shared/components/ScrollToTop";
+import AdminAuthenticatedRoute from "./modules/shared/infra/routers/AdminAuthenticatedRoute";
+import CustomerAuthenticatedRoute from "./modules/shared/infra/routers/CustomerAuthenticatedRoute";
 
 const queryClient = new QueryClient();
 
@@ -18,13 +20,48 @@ function App() {
       <Router>
         <ScrollToTop>
           <Routes>
-            <Route path="/" Component={HomePage} />;
-            <Route path="/trip/:id" Component={DetailTripPage} />
-            <Route path="/payment/:id" Component={PaymentPage} />
-            <Route path="/profile" Component={UserProfilePage} />
-            <Route path="/admin-trip-list" Component={AdminTripListPage} />
-            <Route path="/add-trip" Component={AddTripPage} />
-            <Route path="/transaction-list" Component={TransactionListPage} />
+            <Route path="/" element={<HomePage />} />;
+            <Route path="/trip/:id" element={<DetailTripPage />} />
+            <Route
+              path="/payment/:id"
+              element={
+                <CustomerAuthenticatedRoute>
+                  <PaymentPage />
+                </CustomerAuthenticatedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <CustomerAuthenticatedRoute>
+                  <UserProfilePage />
+                </CustomerAuthenticatedRoute>
+              }
+            />
+            <Route
+              path="/admin-trip-list"
+              element={
+                <AdminAuthenticatedRoute>
+                  <AdminTripListPage />
+                </AdminAuthenticatedRoute>
+              }
+            />
+            <Route
+              path="/add-trip"
+              element={
+                <AdminAuthenticatedRoute>
+                  <AddTripPage />
+                </AdminAuthenticatedRoute>
+              }
+            />
+            <Route
+              path="/transaction-list"
+              element={
+                <AdminAuthenticatedRoute>
+                  <TransactionListPage />
+                </AdminAuthenticatedRoute>
+              }
+            />
           </Routes>
         </ScrollToTop>
       </Router>

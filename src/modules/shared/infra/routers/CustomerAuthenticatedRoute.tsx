@@ -1,26 +1,28 @@
-import React from "react";
-import { Route } from "react-router-dom";
-import HomePage from "../../../../pages";
-import TransactionListPage from "../../../../pages/transaction-list";
-
-type CustomerAuthenticatedRouteProps = {
-  Component: React.ComponentType<any>;
-  path: string;
-};
+import { Navigate } from "react-router-dom";
+import { useCheckIsAdmin } from "../../../users/api/checkIsAdmin";
+import { useUserStore } from "../../../../store/useUserStore";
 
 export default function CustomerAuthenticatedRoute({
-  Component,
-  path,
-}: CustomerAuthenticatedRouteProps) {
-  const { token, isAdmin } = localStorage;
+  children,
+}: {
+  children: JSX.Element;
+}) {
+  const {
+    data: isAdmin,
+    isLoading: isLoadingCheckIsAdmin,
+    isError: isErrorCheckIsAdmin,
+  } = useCheckIsAdmin();
+  const userId = useUserStore((state: any) => state.userId);
 
-  if (token) {
-    if (!isAdmin) {
-      return <Route path={path} Component={Component} />;
+  if (!isLoadingCheckIsAdmin && !isErrorCheckIsAdmin) {
+    if (isAdmin) {
+      return <Navigate to="/transaction-list" replace={true} />;
     } else {
-      return <Route path="/transaction-list" Component={TransactionListPage} />;
+      return children;
     }
-  } else {
-    return <Route path="/" Component={HomePage} />;
+  }
+
+  if ((!isLoadingCheckIsAdmin && isErrorCheckIsAdmin) || !userId) {
+    return <Navigate to="/" replace={true} />;
   }
 }

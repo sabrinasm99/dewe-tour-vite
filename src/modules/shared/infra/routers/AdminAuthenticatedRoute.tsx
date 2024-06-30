@@ -1,25 +1,28 @@
-import React from "react";
-import { Route } from "react-router-dom";
-import HomePage from "../../../../pages";
-
-type AdminAuthenticatedRouteProps = {
-  Component: React.ComponentType<any>;
-  path: string;
-};
+import { Navigate } from "react-router-dom";
+import { useCheckIsAdmin } from "../../../users/api/checkIsAdmin";
+import { useUserStore } from "../../../../store/useUserStore";
 
 export default function AdminAuthenticatedRoute({
-  Component,
-  path,
-}: AdminAuthenticatedRouteProps) {
-  const { token, isAdmin } = localStorage;
+  children,
+}: {
+  children: JSX.Element;
+}) {
+  const {
+    data: isAdmin,
+    isLoading: isLoadingCheckIsAdmin,
+    isError: isErrorCheckIsAdmin,
+  } = useCheckIsAdmin();
+  const userId = useUserStore((state: any) => state.userId);
 
-  if (token) {
+  if (!isLoadingCheckIsAdmin && !isErrorCheckIsAdmin) {
     if (isAdmin) {
-      return <Route path={path} Component={Component} />;
+      return children;
     } else {
-      return <Route path="/" Component={HomePage} />;
+      return <Navigate to="/" replace={true} />;
     }
-  } else {
-    return <Route path="/" Component={HomePage} />;
+  }
+
+  if ((!isLoadingCheckIsAdmin && isErrorCheckIsAdmin) || !userId) {
+    return <Navigate to="/" replace={true} />;
   }
 }

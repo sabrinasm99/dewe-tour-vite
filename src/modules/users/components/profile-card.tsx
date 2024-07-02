@@ -3,9 +3,11 @@ import email from "../../shared/images/email.svg";
 import phone from "../../shared/images/phone.svg";
 import place from "../../shared/images/place.svg";
 import { useState, useRef } from "react";
+import { useGetUserPofile } from "../api/getUserProfile";
+import { useUpdateUser } from "../api/updateUser";
 
 export default function ProfileCard() {
-  const [profilePhoto, setProfilePhoto] = useState<{
+  const [photoProfile, setPhotoProfile] = useState<{
     fileObj: File | null;
     fileUrl: string;
   }>({
@@ -13,26 +15,49 @@ export default function ProfileCard() {
     fileUrl: "",
   });
 
+  const updateUserMutation = useUpdateUser();
+
   const fileInput = useRef<HTMLInputElement>(null);
 
   const handleClick = () => {
     fileInput.current?.click();
   };
 
-  const handleChangeProfilePhoto = (e: any) => {
-    let file = e.target.files[0];
-    if (file) {
-      let changedPhoto = {
+  const handleChangePhotoProfile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let files = e.target.files;
+    if (files && files[0]) {
+      const file = files[0];
+      let changedImage = {
         fileObj: file,
         fileUrl: URL.createObjectURL(file),
       };
-      setProfilePhoto(changedPhoto);
+      setPhotoProfile(changedImage);
+      const formData = new FormData();
+
+      formData.append("image", file);
+
+      updateUserMutation.mutate(formData);
     } else {
-      setProfilePhoto({
+      setPhotoProfile({
         fileObj: null,
         fileUrl: "",
       });
     }
+  };
+
+  const {
+    data: user,
+    isLoading: isLoadingGetUserProfile,
+    isError: isErrorGetUserProfile,
+  } = useGetUserPofile();
+
+  const phoneTransform = (phone: string) => {
+    const phoneArr = [];
+    while (phone) {
+      phoneArr.push(phone.slice(0, 4));
+      phone = phone.slice(4);
+    }
+    return phoneArr.join("-");
   };
 
   return (
@@ -42,8 +67,10 @@ export default function ProfileCard() {
           <h1 className="text-2xl font-bold">Personal Info</h1>
           <div className="flex mt-5 sm:mt-8">
             <img src={name} className="mr-3" />
-            <div>
-              <h3 className="font-semibold text-sm">John Doe</h3>
+            <div className="tracking-wide">
+              {!isLoadingGetUserProfile && !isErrorGetUserProfile && (
+                <h3 className="font-semibold text-sm">{user.name}</h3>
+              )}
               <h3 className="text-xs" style={{ color: "#8A8C90" }}>
                 Full name
               </h3>
@@ -51,8 +78,10 @@ export default function ProfileCard() {
           </div>
           <div className="flex mt-3 sm:mt-6">
             <img src={email} className="mr-3" />
-            <div>
-              <h3 className="font-semibold text-sm">johndoe@mail.com</h3>
+            <div className="tracking-wide">
+              {!isLoadingGetUserProfile && !isErrorGetUserProfile && (
+                <h3 className="font-semibold text-sm">{user.email}</h3>
+              )}
               <h3 className="text-xs" style={{ color: "#8A8C90" }}>
                 Email
               </h3>
@@ -60,8 +89,12 @@ export default function ProfileCard() {
           </div>
           <div className="flex mt-3 sm:mt-6">
             <img src={phone} className="mr-3" />
-            <div>
-              <h3 className="font-semibold text-sm">0812-8623-8911</h3>
+            <div className="tracking-wide">
+              {!isLoadingGetUserProfile && !isErrorGetUserProfile && (
+                <h3 className="font-semibold text-sm">
+                  {phoneTransform(user.phone)}
+                </h3>
+              )}
               <h3 className="text-xs" style={{ color: "#8A8C90" }}>
                 Mobile phone
               </h3>
@@ -69,8 +102,10 @@ export default function ProfileCard() {
           </div>
           <div className="flex mt-3 sm:mt-6">
             <img src={place} className="mr-3" />
-            <div>
-              <h3 className="font-semibold text-sm">Loka Karya No. 3</h3>
+            <div className="tracking-wide">
+              {!isLoadingGetUserProfile && !isErrorGetUserProfile && (
+                <h3 className="font-semibold text-sm">{user.address}</h3>
+              )}
               <h3 className="text-xs" style={{ color: "#8A8C90" }}>
                 Address
               </h3>
@@ -78,9 +113,9 @@ export default function ProfileCard() {
           </div>
         </div>
         <div className="w-full sm:w-1/2 lg:w-1/3 flex flex-col mt-3 sm:mt-0">
-          {profilePhoto.fileUrl ? (
+          {photoProfile.fileUrl || user?.image ? (
             <img
-              src={profilePhoto.fileUrl}
+              src={photoProfile.fileUrl || user.image}
               className="rounded h-64 object-cover"
             />
           ) : (
@@ -110,7 +145,7 @@ export default function ProfileCard() {
               accept="image/*"
               hidden
               ref={fileInput}
-              onChange={handleChangeProfilePhoto}
+              onChange={handleChangePhotoProfile}
             />
           </div>
         </div>

@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { userService } from "../services";
 
-export const useCheckIsAdmin = () => {
+export const useGetUserPofile = () => {
   return useQuery({
-    queryKey: ["checkIsAdmin"],
-    queryFn: () => userService.checkIsAdmin(),
+    queryKey: ["getUserProfile"],
+    queryFn: () => userService.getUserProfile(),
   });
 };

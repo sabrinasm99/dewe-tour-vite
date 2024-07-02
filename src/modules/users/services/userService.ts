@@ -37,17 +37,46 @@ export class UserService extends BaseAPI {
     }
   }
 
-  async checkIsAdmin() {
+  async getUserProfile() {
+    try {
+      const userId = this.authService.getUserId("user-id");
+      if (!userId) {
+        throw new Error("id doesn't exist");
+      }
+
+      const token = this.authService.getToken("access-token");
+      if (!token) {
+        throw new Error("You are not authenticated");
+      }
+
+      const result = await this.get(`/customers/${userId}`, null, {
+        Authorization: token,
+      });
+
+      const image = result.data.data.image;
+
+      return {
+        ...result.data.data,
+        image: image
+          ? `${this.baseUrl}/avatar/${result.data.data.image}`
+          : image,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateUser(data: any) {
     try {
       const userId = this.authService.getUserId("user-id");
       if (!userId) {
         throw new Error("id doesn't exist");
       }
       const token = this.authService.getToken("access-token");
-      const result = await this.get(`/customers/${userId}`, null, {
+      const result = await this.put(`/customers/${userId}`, data, null, {
         Authorization: token,
       });
-      return result.data.data.is_admin;
+      return result;
     } catch (error) {
       throw error;
     }

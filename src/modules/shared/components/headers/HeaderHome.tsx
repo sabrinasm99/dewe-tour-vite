@@ -5,8 +5,8 @@ import RegisterModal from "../modals/RegisterModal";
 import LoginModal from "../modals/LoginModal";
 import CustomerDropdown from "../drop-down/CustomerDropdown";
 import AdminDropdown from "../drop-down/AdminDropdown";
-import { useCheckIsAdmin } from "../../../users/api/checkIsAdmin";
 import { useUserStore } from "../../../../store/useUserStore";
+import { useGetUserPofile } from "../../../users/api/getUserProfile";
 
 export default function HeaderHome() {
   const [search, setSearch] = useState("");
@@ -15,15 +15,16 @@ export default function HeaderHome() {
   const [showCustomerDropdown, setShowCustomerDropdown] = useState(false);
   const [showAdminDropdown, setShowAdminDropdown] = useState(false);
   const userId = useUserStore((state: any) => state.userId);
+
   const {
-    data: isAdmin,
-    isLoading: isLoadingCheckIsAdmin,
-    isError: isErrorCheckIsAdmin,
-    refetch: refetchCheckIsAdmin,
-  } = useCheckIsAdmin();
+    data: user,
+    isLoading: isLoadingGetUserProfile,
+    isError: isErrorGetUserProfile,
+    refetch: refetchGetUserProfile,
+  } = useGetUserPofile();
 
   useEffect(() => {
-    refetchCheckIsAdmin();
+    refetchGetUserProfile();
   }, [userId]);
 
   const handleSearch = (e: any) => {
@@ -36,16 +37,29 @@ export default function HeaderHome() {
         <div className="px-4 md:px-8 lg:px-10 xl:px-16">
           <div className="flex">
             <img src={icon} className="w-40 sm:w-auto" />
-            {!isLoadingCheckIsAdmin && !isErrorCheckIsAdmin && userId && (
+            {!isLoadingGetUserProfile && !isErrorGetUserProfile && userId && (
               <div className="relative ml-auto flex items-center">
-                <FaUserCircle
-                  onClick={() =>
-                    isAdmin
-                      ? setShowAdminDropdown(!showAdminDropdown)
-                      : setShowCustomerDropdown(!showCustomerDropdown)
-                  }
-                  className="text-gray-700 bg-white rounded-full border-2 cursor-pointer border-#FFAF00 w-40px h-40px sm:w-44px sm:h-44px"
-                />
+                {user.image && (
+                  <img
+                    src={user.image}
+                    className="rounded-full border-2 cursor-pointer w-40px h-40px sm:w-44px sm:h-44px border-#FFAF00"
+                    onClick={() =>
+                      user.is_admin
+                        ? setShowAdminDropdown(!showAdminDropdown)
+                        : setShowCustomerDropdown(!showCustomerDropdown)
+                    }
+                  />
+                )}
+                {!user.image && (
+                  <FaUserCircle
+                    onClick={() =>
+                      user.is_admin
+                        ? setShowAdminDropdown(!showAdminDropdown)
+                        : setShowCustomerDropdown(!showCustomerDropdown)
+                    }
+                    className="text-gray-700 bg-white rounded-full border-2 cursor-pointer border-#FFAF00 w-40px h-40px sm:w-44px sm:h-44px"
+                  />
+                )}
                 {showCustomerDropdown && (
                   <CustomerDropdown
                     showCustomerDropdown={showCustomerDropdown}
@@ -60,7 +74,7 @@ export default function HeaderHome() {
                 )}
               </div>
             )}
-            {(isErrorCheckIsAdmin || !userId) && (
+            {(isErrorGetUserProfile || !userId) && (
               <>
                 <div className="flex items-center ml-auto mr-2">
                   <button

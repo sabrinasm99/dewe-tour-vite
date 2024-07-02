@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
-import { useCheckIsAdmin } from "../../../users/api/checkIsAdmin";
 import { useUserStore } from "../../../../store/useUserStore";
+import { useGetUserPofile } from "../../../users/api/getUserProfile";
 
 export default function AdminAuthenticatedRoute({
   children,
@@ -8,21 +8,21 @@ export default function AdminAuthenticatedRoute({
   children: JSX.Element;
 }) {
   const {
-    data: isAdmin,
-    isLoading: isLoadingCheckIsAdmin,
-    isError: isErrorCheckIsAdmin,
-  } = useCheckIsAdmin();
+    data: user,
+    isLoading: isLoadingGetUserProfile,
+    isError: isErrorGetUserProfile,
+  } = useGetUserPofile();
   const userId = useUserStore((state: any) => state.userId);
 
-  if (!isLoadingCheckIsAdmin && !isErrorCheckIsAdmin) {
-    if (isAdmin) {
+  if (!isLoadingGetUserProfile && !isErrorGetUserProfile) {
+    if (user.is_admin) {
       return children;
     } else {
       return <Navigate to="/" replace={true} />;
     }
   }
 
-  if ((!isLoadingCheckIsAdmin && isErrorCheckIsAdmin) || !userId) {
+  if ((!isLoadingGetUserProfile && isErrorGetUserProfile) || !userId) {
     return <Navigate to="/" replace={true} />;
   }
 }

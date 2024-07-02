@@ -3,8 +3,7 @@ import email from "../../shared/images/email.svg";
 import phone from "../../shared/images/phone.svg";
 import place from "../../shared/images/place.svg";
 import { useState, useRef } from "react";
-import { useGetUserPofile } from "../api/getUserProfile";
-import { useUpdateUser } from "../api/updateUser";
+import { useGetUserPofile, useUpdateUser } from "../api";
 
 export default function ProfileCard() {
   const [photoProfile, setPhotoProfile] = useState<{

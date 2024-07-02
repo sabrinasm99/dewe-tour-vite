@@ -6,7 +6,7 @@ import LoginModal from "../modals/LoginModal";
 import CustomerDropdown from "../drop-down/CustomerDropdown";
 import AdminDropdown from "../drop-down/AdminDropdown";
 import { useUserStore } from "../../../../store/useUserStore";
-import { useGetUserPofile } from "../../../users/api/getUserProfile";
+import { useGetUserPofile } from "../../../users/api";
 
 export default function HeaderHome() {
   const [search, setSearch] = useState("");

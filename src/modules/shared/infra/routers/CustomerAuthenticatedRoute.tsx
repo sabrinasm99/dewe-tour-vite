@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useUserStore } from "../../../../store/useUserStore";
-import { useGetUserPofile } from "../../../users/api/getUserProfile";
+import { useGetUserPofile } from "../../../users/api";
 
 export default function CustomerAuthenticatedRoute({
   children,

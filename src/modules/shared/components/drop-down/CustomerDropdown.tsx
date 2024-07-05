@@ -48,7 +48,7 @@ export default function CustomerDropdown({
           <div
             onClick={() => {
               setShowCustomerDropdown(!showCustomerDropdown);
-              navigate(`/payment/1`);
+              navigate("/payment");
             }}
             className="flex py-1 px-5 cursor-pointer hover:bg-gray-200"
           >

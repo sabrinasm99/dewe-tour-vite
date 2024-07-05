@@ -23,7 +23,7 @@ function App() {
             <Route path="/" element={<HomePage />} />;
             <Route path="/trip/:id" element={<DetailTripPage />} />
             <Route
-              path="/payment/:id"
+              path="/payment"
               element={
                 <CustomerAuthenticatedRoute>
                   <PaymentPage />

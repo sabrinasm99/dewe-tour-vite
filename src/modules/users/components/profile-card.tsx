@@ -60,7 +60,7 @@ export default function ProfileCard() {
   };
 
   return (
-    <div className="bg-white rounded p-5 w-90% md:w-3/4 lg:w-2/3 xl:w-1/2">
+    <div className="relative z-10 bg-white rounded p-5 w-90% md:w-3/4 lg:w-2/3 xl:w-1/2">
       <div className="flex flex-col sm:flex-row">
         <div className="w-full sm:w-1/2 lg:w-2/3">
           <h1 className="text-2xl font-bold">Personal Info</h1>

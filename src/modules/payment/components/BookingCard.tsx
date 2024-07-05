@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 import icon2 from "../../shared/images/icon2.svg";
 import PaymentConfirmation from "./PaymentConfirmation";
@@ -11,9 +11,11 @@ import { TransactionProps } from "../../shared/types";
 export default function BookingCard({
   addedStyles,
   transaction,
+  setShowApprovalModal,
 }: {
   addedStyles?: string;
   transaction: TransactionProps;
+  setShowApprovalModal?: React.Dispatch<boolean>;
 }) {
   const [image, setImage] = useState<{
     fileObj: File | null;
@@ -64,7 +66,7 @@ export default function BookingCard({
   };
 
   const imageNameGenerator = (image: string | undefined) => {
-    if (!image) return false;
+    if (!image) return "";
 
     if (image.includes("/")) {
       if (!image.split("/").pop()) {
@@ -258,12 +260,19 @@ export default function BookingCard({
           </div>
           <div
             className={`${
-              pathname === "/transaction-list" ? "flex" : "hidden"
+              pathname === "/transaction-list" &&
+              transaction.status === "waiting approve"
+                ? "flex"
+                : "hidden"
             } mt-5 text-white`}
           >
             <div className="ml-auto">
               <button
-                // onClick={() => setShowModalApprove(false)}
+                onClick={() => {
+                  if (setShowApprovalModal) {
+                    setShowApprovalModal(false);
+                  }
+                }}
                 className="px-3 py-1 font-semibold rounded mr-3 bg-#FF0742"
               >
                 Cancel

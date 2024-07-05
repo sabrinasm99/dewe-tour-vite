@@ -1,5 +1,7 @@
 import { useAddTransaction } from "./addTransaction";
+import { useGetAllTransactions } from "./getAllTransactions";
 import { useGetApprovedTransactionsByUserId } from "./getApprovedTransactionsByUserId";
+import { useGetTransactionById } from "./getTransactionById";
 import { useGetTransactionsByUserId } from "./getTransactionsByUserId";
 import { usePayForTrip } from "./payForTrip";
 import { useUploadPaymentProof } from "./uploadPaymentProof";
@@ -10,4 +12,6 @@ export {
   usePayForTrip,
   useGetApprovedTransactionsByUserId,
   useUploadPaymentProof,
+  useGetAllTransactions,
+  useGetTransactionById,
 };

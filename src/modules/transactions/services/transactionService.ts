@@ -31,6 +31,54 @@ export class TransactionService extends BaseAPI {
     }
   }
 
+  async getAllTransactions() {
+    try {
+      const token = this.authService.getToken("access-token");
+      if (!token) {
+        throw new Error("You are not authenticated");
+      }
+
+      const result = await this.get(`/transactions/`, null, {
+        Authorization: token,
+      });
+
+      return result.data.data.map((transaction: TransactionProps) => {
+        return {
+          ...transaction,
+          attachment: transaction.attachment
+            ? `${this.baseUrl}/proof/${transaction.attachment}`
+            : transaction.attachment,
+        };
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getTransactionById(id: string) {
+    try {
+      const token = this.authService.getToken("access-token");
+      if (!token) {
+        throw new Error("You are not authenticated");
+      }
+
+      const result = await this.get(`/transactions/${id}`, null, {
+        Authorization: token,
+      });
+
+      const transaction = result.data.data;
+
+      return {
+        ...transaction,
+        attachment: transaction.attachment
+          ? `${this.baseUrl}/proof/${transaction.attachment}`
+          : transaction.attachment,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getTransactionsByUserId() {
     try {
       const userId = this.authService.getUserId("user-id");

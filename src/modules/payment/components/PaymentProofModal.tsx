@@ -1,15 +1,10 @@
 import React from "react";
 
-type ImageProps = {
-  fileObj: File | null;
-  fileUrl: string;
-};
-
 export default function PaymentProofModal({
-  image,
+  imageUrl,
   setShowPaymentProof,
 }: {
-  image: ImageProps;
+  imageUrl: string;
   setShowPaymentProof: React.Dispatch<boolean>;
 }) {
   const closeModal = () => {
@@ -29,8 +24,8 @@ export default function PaymentProofModal({
         }}
         className="rounded-md p-4 bg-white"
       >
-        {image.fileUrl ? (
-          <img src={image.fileUrl} className="w-full" alt="image" />
+        {imageUrl ? (
+          <img src={imageUrl} className="w-full" alt="image" />
         ) : (
           <div
             className="w-full rounded flex justify-center items-center text-center"

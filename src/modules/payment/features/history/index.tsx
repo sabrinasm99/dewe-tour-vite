@@ -1,15 +1,25 @@
+import { TransactionProps } from "../../../shared/types";
+import { useGetApprovedTransactionsByUserId } from "../../../transactions/api";
 import BookingCard from "../../components/BookingCard";
 
 export default function PaymentHistories() {
-  const status = true;
+  const { data: transactions } = useGetApprovedTransactionsByUserId();
+
   return (
-    <div className="mt-20 flex w-full justify-center">
+    <div className="grow mt-14 flex w-full justify-center">
       <div className="w-90% md:w-85% lg:w-80% xl:w-2/3">
-        <h1 className="text-2xl font-bold">History Trip</h1>
-        {status ? (
-          <BookingCard addedStyles="w-full xl:w-full" />
+        <h1 className="text-2xl font-bold">Trip History</h1>
+        {transactions && transactions.length ? (
+          transactions.map((transaction: TransactionProps) => (
+            <BookingCard
+              addedStyles="w-full xl:w-full"
+              transaction={transaction}
+            />
+          ))
         ) : (
-          <div className="mt-8 text-center">No History Trip</div>
+          <p className="mt-8 text-center text-xl tracking-wider text-gray-700 uppercase">
+            No Trip History
+          </p>
         )}
       </div>
     </div>

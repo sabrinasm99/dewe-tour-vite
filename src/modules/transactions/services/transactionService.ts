@@ -1,5 +1,5 @@
-import { TransactionProps } from "../../payment/features/history";
 import { BaseAPI } from "../../shared/infra/services/BaseAPI";
+import { TransactionProps } from "../../shared/types";
 import { IAuthService } from "../../users/services/authService";
 
 export class TransactionService extends BaseAPI {

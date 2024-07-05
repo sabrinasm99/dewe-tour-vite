@@ -2,14 +2,11 @@ import React from "react";
 
 export default function PaymentConfirmation({
   setShowPaymentConfirm,
-  setPaymentStatus,
 }: {
   setShowPaymentConfirm: React.Dispatch<boolean>;
-  setPaymentStatus: React.Dispatch<string>;
 }) {
   const clickHere = () => {
     setShowPaymentConfirm(false);
-    setPaymentStatus("Waiting Approve");
   };
   return (
     <>

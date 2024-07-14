@@ -29,7 +29,8 @@ export type TripProps = {
   date: string;
   price: number;
   description: string;
-  image: string;
+  cover_image: string;
+  detailed_images: string[];
 };
 
 export type TransactionProps = {

@@ -15,7 +15,7 @@ export default function TransactionList() {
       <div className="mt-20 w-90%">
         <h1 className="font-bold text-2xl">Incoming Transaction</h1>
         <div className="bg-white rounded mt-5 w-full overflow-x-auto">
-          <table className="table-fixed w-auto sm:w-full">
+          <table className="table-fixed w-auto min-[502px]:w-full">
             <thead>
               <tr className="border-b border-#B7B7B7">
                 <th className="rounded-tl bg-#FFAF00 py-3 pl-3">No</th>
@@ -27,8 +27,7 @@ export default function TransactionList() {
               </tr>
             </thead>
             <tbody>
-              {transactions &&
-                transactions.length &&
+              {transactions && transactions.length ? (
                 transactions.map(
                   (transaction: TransactionProps, index: any) => (
                     <tr
@@ -49,7 +48,7 @@ export default function TransactionList() {
                         className={`${
                           transaction.status === "waiting approve"
                             ? "text-#F7941E"
-                            : transaction.status === "approve"
+                            : transaction.status === "approved"
                             ? "text-#0ACF83"
                             : "text-#FF0742"
                         } pl-3 py-3 capitalize font-medium`}
@@ -68,7 +67,17 @@ export default function TransactionList() {
                       </td>
                     </tr>
                   )
-                )}
+                )
+              ) : (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="text-center py-5 tracking-wide uppercase"
+                  >
+                    No Incoming Transaction
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

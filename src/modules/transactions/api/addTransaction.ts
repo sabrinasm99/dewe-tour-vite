@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { transactionService } from "../services";
 
 type AddTransactionProps = {
@@ -7,14 +7,17 @@ type AddTransactionProps = {
   trip_id: string;
 };
 
-export const useAddTransaction = () =>
-  useMutation({
+export const useAddTransaction = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
     mutationFn: (transaction: AddTransactionProps) =>
       transactionService.addTransaction(transaction),
-    onSuccess: (res) => {
-      console.log(res);
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["getTransactionsByUserId"] });
     },
     onError: (err) => {
       console.log(err);
     },
   });
+};

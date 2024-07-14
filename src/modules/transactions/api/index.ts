@@ -1,4 +1,5 @@
 import { useAddTransaction } from "./addTransaction";
+import { useApproveTransaction } from "./approveTransaction";
 import { useGetAllTransactions } from "./getAllTransactions";
 import { useGetApprovedTransactionsByUserId } from "./getApprovedTransactionsByUserId";
 import { useGetTransactionById } from "./getTransactionById";
@@ -14,4 +15,5 @@ export {
   useUploadPaymentProof,
   useGetAllTransactions,
   useGetTransactionById,
+  useApproveTransaction,
 };

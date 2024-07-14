@@ -11,6 +11,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ScrollToTop from "./modules/shared/components/ScrollToTop";
 import AdminAuthenticatedRoute from "./modules/shared/infra/routers/AdminAuthenticatedRoute";
 import CustomerAuthenticatedRoute from "./modules/shared/infra/routers/CustomerAuthenticatedRoute";
+import EditTripPage from "./pages/edit-trip";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +21,7 @@ function App() {
       <Router>
         <ScrollToTop>
           <Routes>
-            <Route path="/" element={<HomePage />} />;
+            <Route path="/" element={<HomePage />} />
             <Route path="/trip/:id" element={<DetailTripPage />} />
             <Route
               path="/payment"
@@ -59,6 +60,14 @@ function App() {
               element={
                 <AdminAuthenticatedRoute>
                   <TransactionListPage />
+                </AdminAuthenticatedRoute>
+              }
+            />
+            <Route
+              path="/edit-trip/:id"
+              element={
+                <AdminAuthenticatedRoute>
+                  <EditTripPage />
                 </AdminAuthenticatedRoute>
               }
             />

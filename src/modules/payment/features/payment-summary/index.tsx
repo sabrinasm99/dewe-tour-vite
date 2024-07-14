@@ -9,7 +9,11 @@ export default function PaymentSummary() {
     <div className="grow flex flex-col-reverse justify-center items-center">
       {transactions && transactions.length ? (
         transactions.map((transaction: TransactionProps) => (
-          <BookingCard key={transaction.id} transaction={transaction} />
+          <BookingCard
+            key={transaction.id}
+            transaction={transaction}
+            addedStyles="my-10"
+          />
         ))
       ) : (
         <p className="uppercase text-2xl tracking-wider text-gray-700">

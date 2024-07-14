@@ -72,6 +72,7 @@ export default {
         "#F9F9F9": "#F9F9F9",
         "#FF0742": "#FF0742",
         "#0ACF83": "#0ACF83",
+        inputTrip: "rgba(196, 196, 196, 0.5)",
       },
       boxShadow: {
         modal: "1px 1px 8px black",
@@ -81,6 +82,7 @@ export default {
         "#FFAF00": "#FFAF00",
         "#D3D3D3": "#D3D3D3",
         "#B7B7B7": "#B7B7B7",
+        "#B1B1B1": "#B1B1B1",
         bookingCard: "rgba(183, 183, 183, 0.5)",
       },
       backgroundImage: {

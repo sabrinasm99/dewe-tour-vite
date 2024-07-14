@@ -4,9 +4,10 @@ import icon2 from "../../shared/images/icon2.svg";
 import PaymentConfirmation from "./PaymentConfirmation";
 import PaymentProofModal from "./PaymentProofModal";
 import { useLocation } from "react-router-dom";
-import { usePayForTrip } from "../../transactions/api";
+import { useApproveTransaction, usePayForTrip } from "../../transactions/api";
 import { useUploadPaymentProof } from "../../transactions/api";
 import { TransactionProps } from "../../shared/types";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function BookingCard({
   addedStyles,
@@ -31,6 +32,7 @@ export default function BookingCard({
 
   const payForTripMutation = usePayForTrip();
   const uploadPaymentProofMutation = useUploadPaymentProof();
+  const approveTransactionMutation = useApproveTransaction();
 
   const fileInput = useRef<HTMLInputElement>(null);
 
@@ -61,6 +63,10 @@ export default function BookingCard({
   };
 
   const clickPay = (id: string) => {
+    if (!transaction.attachment) {
+      toast.error("You must attach payment proof first");
+      return;
+    }
     setShowPaymentConfirm(true);
     payForTripMutation.mutate(id);
   };
@@ -78,6 +84,10 @@ export default function BookingCard({
         ? image.slice(0, 5) + "..." + image.split(".")[1]
         : image;
     }
+  };
+
+  const clickApprove = (id: string) => {
+    approveTransactionMutation.mutate(id);
   };
 
   return (
@@ -114,12 +124,12 @@ export default function BookingCard({
                 </h4>
                 <div
                   className={`${
-                    transaction.status === "approve"
+                    transaction.status === "approved"
                       ? "bg-green-100 text-#0BDC5F"
                       : transaction.status === "waiting approve"
                       ? "bg-orange-100 text-#FF9900"
                       : "bg-red-100 text-#EC7A7A"
-                  } mt-2 lg:mt-5 text-sm py-1 w-1/2 sm:w-1/3 text-center rounded capitalize`}
+                  } mt-2 lg:mt-5 text-sm py-1 w-1/2 sm:w-1/3 text-center rounded capitalize font-medium`}
                 >
                   {transaction.status}
                 </div>
@@ -278,7 +288,7 @@ export default function BookingCard({
                 Cancel
               </button>
               <button
-                // onClick={() => clickApprove(detail.id)}
+                onClick={() => clickApprove(transaction.id)}
                 className="px-3 py-1 font-semibold rounded bg-#0ACF83"
               >
                 Approve
@@ -297,6 +307,7 @@ export default function BookingCard({
         >
           PAY
         </button>
+        <Toaster position="bottom-center" />
       </div>
       {showPaymentConfirm && (
         <PaymentConfirmation setShowPaymentConfirm={setShowPaymentConfirm} />

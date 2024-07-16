@@ -53,9 +53,7 @@ export default function DetailTrip() {
             <h4 className="font-semibold text-#A8A8A8">{trip.country.name}</h4>
             <img
               src={trip.detailed_images[0]}
-              // src={photo1}
-              className="w-full mt-5 object-cover rounded-md"
-              style={{ height: "370px" }}
+              className="w-full mt-5 object-cover rounded-md h-370px"
             />
             <div className="mt-4 grid grid-cols-3 gap-4">
               {trip.detailed_images
@@ -64,7 +62,7 @@ export default function DetailTrip() {
                   <div key={i} className="w-full">
                     <img
                       src={image}
-                      className="w-full object-contain"
+                      className="w-full object-cover rounded-md"
                       style={{ height: "174.663px" }}
                     />
                   </div>
@@ -127,16 +125,6 @@ export default function DetailTrip() {
             </div>
             <h3 className="font-bold text-sm mt-8">Description</h3>
             <h4 className="text-xs lg:text-sm text-#A8A8A8">
-              {/* <p className="font-bold inline">Lorem Ipsum</p> is simply dummy text
-        of the printing and typesetting industry. Lorem Ipsum has been the
-        industry's standard dummy text ever since the 1500s, when an unknown
-        printer took a galley of type and scrambled it to make a type specimen
-        book. It has survived not only five centuries, but also the leap into
-        electronic typesetting, remaining essentially unchanged. It was
-        popularised in the 1960s with the release of Letraset sheets
-        containing Lorem Ipsum passages, and more recently with desktop
-        publishing software like Aldus PageMaker including versions of Lorem
-        Ipsum. */}
               {trip.description}
             </h4>
             <div className="mt-5 flex">

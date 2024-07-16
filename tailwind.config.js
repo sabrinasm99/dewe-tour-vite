@@ -25,6 +25,7 @@ export default {
         "68px": "68px",
         "44px": "44px",
         "40px": "40px",
+        "370px": "370px",
       },
       fontSize: {
         "60px": "60px",

@@ -3,14 +3,24 @@ import styles from "./styles/trip-card.module.css";
 import { MdEdit } from "react-icons/md";
 import { IoMdTrash } from "react-icons/io";
 import { TripProps } from "../../shared/types";
+import React from "react";
 
-export default function TripCard({ trip }: { trip: TripProps }) {
+export default function TripCard({
+  trip,
+  setSelectedTrip,
+  setShowDeleteConfirmation,
+}: {
+  trip: TripProps;
+  setSelectedTrip?: React.Dispatch<TripProps>;
+  setShowDeleteConfirmation?: React.Dispatch<boolean>;
+}) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
   const clickDetail = (id: string) => {
     navigate(`/trip/${id}`);
   };
+
   return (
     <section
       key={trip.id}
@@ -45,9 +55,17 @@ export default function TripCard({ trip }: { trip: TripProps }) {
           <MdEdit />
           <p className="ml-1 font-medium">Edit</p>
         </section>
-        <section className="flex items-center ml-3 text-gray-600 hover:text-red-500">
+        <section
+          onClick={() => {
+            if (setSelectedTrip && setShowDeleteConfirmation) {
+              setSelectedTrip({ ...trip });
+              setShowDeleteConfirmation(true);
+            }
+          }}
+          className="flex items-center ml-3 text-gray-600 hover:text-red-500"
+        >
           <IoMdTrash />
-          <p className="ml-1 font-medium">Remove</p>
+          <p className="ml-1 font-medium">Delete</p>
         </section>
       </article>
       <p className={styles["card-quota"]}>

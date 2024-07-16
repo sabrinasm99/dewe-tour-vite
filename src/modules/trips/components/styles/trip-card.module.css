@@ -1,9 +1,9 @@
 .card-container {
-  @apply bg-white rounded-md p-2 relative cursor-pointer;
+  @apply bg-white rounded-md p-2 relative cursor-pointer flex flex-col;
 }
 
 .card-img {
-  @apply w-full;
+  @apply w-full object-cover;
 }
 
 .card-title {
@@ -11,7 +11,7 @@
 }
 
 .price-and-place-container {
-  @apply flex flex-col sm:flex-row mt-2;
+  @apply flex flex-col sm:flex-row mt-auto;
 }
 
 .card-price {

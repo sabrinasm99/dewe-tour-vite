@@ -2,18 +2,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { tripService } from "../services";
 import toast from "react-hot-toast";
 
-type SaveTripProps = {
-  id: string;
-  data: FormData;
-};
-export const useSaveTrip = () => {
+export const useDeleteTrip = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, data }: SaveTripProps) => tripService.saveTrip(id, data),
+    mutationFn: (id: string) => tripService.deleteTrip(id),
 
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getTripByIdOnEditTrip"] });
-      toast.success("Trip has been updated");
+      queryClient.invalidateQueries({ queryKey: ["getAllTrips"] });
+      toast.success("The trip has been deleted");
     },
 
     onError: (err) => {

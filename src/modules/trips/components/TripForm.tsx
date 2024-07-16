@@ -3,7 +3,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { IoAddCircle } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { getAllCountries } from "../../country/api";
-import { useAddTrip, useSaveTrip } from "../api";
+import { useAddTrip, useUpdateTrip } from "../api";
 import { TripProps } from "../../shared/types";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -70,7 +70,7 @@ export default function TripForm({
 
   const addTripMutation = useAddTrip();
 
-  const saveTripMutation = useSaveTrip();
+  const updateTripMutation = useUpdateTrip();
 
   useEffect(() => {
     if (trip) {
@@ -292,7 +292,7 @@ export default function TripForm({
       });
     }
 
-    saveTripMutation.mutate({ id: tripId, data: formData });
+    updateTripMutation.mutate({ id: tripId, data: formData });
   };
 
   return (

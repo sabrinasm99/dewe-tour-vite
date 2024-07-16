@@ -96,4 +96,20 @@ export class TripService extends BaseAPI {
       throw error;
     }
   }
+
+  async deleteTrip(id: string) {
+    try {
+      const token = this.authService.getToken("access-token");
+      if (!token) {
+        throw new Error("You are not authenticated");
+      }
+      const result = this.delete(`/trips/${id}`, null, null, {
+        Authorization: token,
+      });
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

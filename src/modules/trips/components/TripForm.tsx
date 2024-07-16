@@ -64,6 +64,14 @@ export default function TripForm({
 
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
+  const detailedImagesInput = useRef<HTMLInputElement>(null);
+
+  const { data: countries } = getAllCountries();
+
+  const addTripMutation = useAddTrip();
+
+  const saveTripMutation = useSaveTrip();
+
   useEffect(() => {
     if (trip) {
       setInputTrip({
@@ -92,23 +100,15 @@ export default function TripForm({
           fileUrl: trip.detailed_images[i],
         });
       }
-      setDetailedImages([...detailedImages, ...newDetailedImages]);
+      setDetailedImages([...newDetailedImages]);
 
       setTripId(trip.id);
     }
-  }, []);
-
-  const detailedImagesInput = useRef<HTMLInputElement>(null);
+  }, [trip]);
 
   const handleClickAddDetailedImages = () => {
     detailedImagesInput.current?.click();
   };
-
-  const { data: countries } = getAllCountries();
-
-  const addTripMutation = useAddTrip();
-
-  const saveTripMutation = useSaveTrip();
 
   const deleteDetailedImage = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -211,7 +211,7 @@ export default function TripForm({
     formData.append("eat", inputTrip.eat);
     formData.append("days", inputTrip.days);
     formData.append("nights", inputTrip.nights);
-    formData.append("date", "");
+    formData.append("date", inputTrip.date);
     formData.append("price", inputTrip.price);
     formData.append("quota", inputTrip.quota);
     formData.append("description", inputTrip.description);
@@ -226,25 +226,25 @@ export default function TripForm({
 
     addTripMutation.mutate(formData);
 
-    // setInputTrip({
-    //   ...inputTrip,
-    //   title: "",
-    //   countryId: "",
-    //   accomodation: "",
-    //   transportation: "",
-    //   eat: "",
-    //   days: "",
-    //   nights: "",
-    //   date: "",
-    //   price: "",
-    //   quota: "",
-    //   description: "",
-    // });
+    setInputTrip({
+      ...inputTrip,
+      title: "",
+      countryId: "",
+      accomodation: "",
+      transportation: "",
+      eat: "",
+      days: "",
+      nights: "",
+      date: "",
+      price: "",
+      quota: "",
+      description: "",
+    });
 
-    // setSelectedDate(new Date())
+    setSelectedDate(new Date());
 
-    // setCoverImage({ ...coverImage, fileObj: null, fileUrl: "" });
-    // setDetailedImages([]);
+    setCoverImage({ fileObj: null, fileUrl: "" });
+    setDetailedImages([]);
   };
 
   const submitSaveTrip = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -269,7 +269,7 @@ export default function TripForm({
     formData.append("eat", inputTrip.eat);
     formData.append("days", inputTrip.days);
     formData.append("nights", inputTrip.nights);
-    formData.append("date", "");
+    formData.append("date", inputTrip.date);
     formData.append("price", inputTrip.price);
     formData.append("quota", inputTrip.quota);
     formData.append("description", inputTrip.description);
@@ -293,28 +293,6 @@ export default function TripForm({
     }
 
     saveTripMutation.mutate({ id: tripId, data: formData });
-
-    setInputTrip({
-      ...inputTrip,
-      title: "",
-      countryId: "",
-      accomodation: "",
-      transportation: "",
-      eat: "",
-      days: "",
-      nights: "",
-      date: "",
-      price: "",
-      quota: "",
-      description: "",
-    });
-
-    setTripId("");
-
-    setSelectedDate(new Date());
-
-    setCoverImage({ ...coverImage, fileObj: null, fileUrl: "" });
-    setDetailedImages([]);
   };
 
   return (

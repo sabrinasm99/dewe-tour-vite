@@ -26,6 +26,8 @@ export default {
         "44px": "44px",
         "40px": "40px",
         "370px": "370px",
+        "450px": "450px",
+        "174.663px": "174.663px",
       },
       fontSize: {
         "60px": "60px",
@@ -74,6 +76,7 @@ export default {
         "#FF0742": "#FF0742",
         "#0ACF83": "#0ACF83",
         inputTrip: "rgba(196, 196, 196, 0.5)",
+        backdropGray: "rgba(107, 114, 128, 0.5)",
       },
       boxShadow: {
         modal: "1px 1px 8px black",

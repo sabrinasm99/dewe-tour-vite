@@ -7,6 +7,7 @@ import calendar from "../../../shared/images/calendar.svg";
 import React, { useEffect, useState } from "react";
 import { useAddTransaction } from "../../../transactions/api";
 import { useGetTripByIdOnDetailTrip } from "../../api";
+import TripImagesSlide from "../../modals/TripImagesSlide";
 
 export default function DetailTrip() {
   const { id: tripId } = useParams();
@@ -18,6 +19,8 @@ export default function DetailTrip() {
   const [quantity, setQuantity] = useState(1);
 
   const [tripPrice, setTripPrice] = useState(0);
+
+  const [showDetailedImages, setShowDetailedImages] = useState(false);
 
   useEffect(() => {
     if (trip) {
@@ -53,18 +56,27 @@ export default function DetailTrip() {
             <h4 className="font-semibold text-#A8A8A8">{trip.country.name}</h4>
             <img
               src={trip.detailed_images[0]}
-              className="w-full mt-5 object-cover rounded-md h-370px"
+              className="w-full mt-5 object-cover rounded-md sm:h-370px"
             />
-            <div className="mt-4 grid grid-cols-3 gap-4">
+            <div className="mt-2 sm:mt-4 grid grid-cols-3 gap-2 sm:gap-4">
               {trip.detailed_images
                 .filter((_, i) => i !== 0)
                 .map((image, i) => (
-                  <div key={i} className="w-full">
+                  <div key={i} className="w-full relative">
                     <img
                       src={image}
-                      className="w-full object-cover rounded-md"
-                      style={{ height: "174.663px" }}
+                      className="w-full object-cover rounded-md h-16 sm:h-174.663px"
                     />
+                    <div
+                      className={`${
+                        i === 2 ? "block" : "hidden"
+                      } cursor-pointer absolute text-lg text-white font-bold top-0 left-0 h-full w-full bg-backdrop rounded-md`}
+                      onClick={() => setShowDetailedImages(true)}
+                    >
+                      <p className="flex justify-center items-center h-full tracking-wider text-xs sm:text-base">
+                        See All Photos
+                      </p>
+                    </div>
                   </div>
                 ))}
               {/* <div className="w-full">
@@ -170,6 +182,12 @@ export default function DetailTrip() {
               BOOK NOW
             </button>
           </div>
+          {showDetailedImages && (
+            <TripImagesSlide
+              tripImages={[trip.cover_image, ...trip.detailed_images]}
+              setShowDetailedImages={setShowDetailedImages}
+            />
+          )}
         </>
       )}
     </div>

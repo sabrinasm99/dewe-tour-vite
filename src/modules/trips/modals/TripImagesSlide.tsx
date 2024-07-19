@@ -45,11 +45,6 @@ export default function TripImagesSlide({
                     <img src={image} className="h-full object-cover" />
                   </div>
                 ))}
-                <div className="h-24 border-2 border-blue-500 cursor-pointer flex justify-center"></div>
-                <div className="h-24 border-2 border-blue-500 cursor-pointer flex justify-center"></div>
-                <div className="h-24 border-2 border-blue-500 cursor-pointer flex justify-center"></div>
-                <div className="h-24 border-2 border-blue-500 cursor-pointer flex justify-center"></div>
-                <div className="h-24 border-2 border-blue-500 cursor-pointer flex justify-center"></div>
               </article>
             </div>
           </section>

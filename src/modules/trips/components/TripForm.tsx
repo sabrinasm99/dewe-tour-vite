@@ -477,13 +477,13 @@ export default function TripForm({
           </div>
           <div className="mt-5">
             <label className="font-bold pl-1">Detailed Images</label>
-            <div className="grid grid-cols-4 gap-y-3 mt-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1 md:gap-2 mt-2">
               {detailedImages.length ? (
                 detailedImages.map((image, i) => (
                   <div key={i} className="flex justify-center relative group">
                     <img
                       src={image.fileUrl}
-                      className="object-contain h-52"
+                      className="object-contain h-32 sm:h-44 md:h-48 lg:h-52"
                       alt="image"
                     />
                     <div className="absolute hover:bg-backdrop inset-0 flex justify-center items-center">
@@ -501,16 +501,16 @@ export default function TripForm({
               )}
               <div
                 className={`${
-                  detailedImages.length !== 0 && detailedImages.length % 4 !== 0
+                  detailedImages.length !== 0
                     ? "justify-center"
                     : "justify-start"
                 } flex`}
               >
                 <div
                   onClick={handleClickAddDetailedImages}
-                  className="cursor-pointer border-2 border-gray-500 h-52 w-36 rounded-xl border-dashed flex items-center justify-center"
+                  className="cursor-pointer border-2 border-gray-500 h-32 sm:h-44 md:h-48 lg:h-52 w-24 sm:w-32 md:w-36 rounded-xl border-dashed flex items-center justify-center"
                 >
-                  <IoAddCircle className="text-6xl text-gray-500 hover:text-#FFAF00" />
+                  <IoAddCircle className="text-4xl sm:text-5xl md:text-6xl text-gray-500 hover:text-#FFAF00" />
                 </div>
               </div>
               <input

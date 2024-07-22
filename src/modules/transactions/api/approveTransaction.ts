@@ -7,7 +7,12 @@ export const useApproveTransaction = () => {
     mutationFn: (id: string) => transactionService.approveTransaction(id),
 
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getTransactionById"] });
+      queryClient.invalidateQueries({
+        queryKey: ["getTransactionById"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["getAllTransactions"],
+      });
     },
 
     onError: (err) => {

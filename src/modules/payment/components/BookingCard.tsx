@@ -94,13 +94,19 @@ export default function BookingCard({
     <>
       <div
         className={twMerge(
-          "w-90% xl:w-3/4 h-auto flex flex-col relative z-10 py-3 xl:py-0",
+          `w-90% xl:w-3/4 flex relative z-10 ${
+            location.pathname === "/transaction-list"
+              ? "flex-row py-0 items-center"
+              : "py-3 flex-col"
+          }  xl:py-0`,
           addedStyles
         )}
       >
         <div
-          className={`${
-            location.pathname === "/profile" ? "mt-8" : "mt-0"
+          className={`${location.pathname === "/profile" ? "mt-8" : "mt-0"} ${
+            location.pathname === "/transaction-list"
+              ? "h-full w-full overflow-y-auto"
+              : ""
           } bg-white rounded border-2 py-2 px-4 border-#B7B7B7`}
         >
           <div className="flex">
@@ -218,13 +224,6 @@ export default function BookingCard({
               </div>
             </div>
           </div>
-          {/* <div className="flex">
-          <h5 className="ml-auto text-xs">
-            {location.pathname === "/profile"
-              ? "TCK0101"
-              : "upload payment proof"}
-          </h5>
-        </div> */}
           <div className="flex flex-row lg:flex-col mt-2 lg:mt-0">
             <div className="flex lg:border-b-2 w-1/2 lg:w-full lg:pb-2 border-bookingCard">
               <div className="w-full lg:w-2/3 flex flex-col lg:flex-row">

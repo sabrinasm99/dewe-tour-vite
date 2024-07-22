@@ -13,11 +13,11 @@ export default function TransactionApprovalModal({
 
   return (
     <>
-      <div className="fixed w-2/3 top-50% left-50% z-30 -translate-x-50% -translate-y-50%">
+      <div className="fixed w-90% sm:w-3/5 md:w-1/2 lg:w-4/5 xl:w-2/3 h-4/5 lg:h-auto top-50% left-50% z-30 -translate-x-50% -translate-y-50% bg-blue-100">
         {transaction && (
           <BookingCard
             setShowApprovalModal={setShowApprovalModal}
-            addedStyles="w-full xl:w-full"
+            addedStyles="w-full xl:w-full h-full"
             transaction={transaction}
           />
         )}

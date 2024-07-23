@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import hotel from "../../../shared/images/hotel.svg";
 import meal from "../../../shared/images/meal.svg";
 import time from "../../../shared/images/time.svg";
@@ -8,10 +8,10 @@ import React, { useEffect, useState } from "react";
 import { useAddTransaction } from "../../../transactions/api";
 import { useGetTripByIdOnDetailTrip } from "../../api";
 import TripImagesSlide from "../../modals/TripImagesSlide";
+import { Toaster } from "react-hot-toast";
 
 export default function DetailTrip() {
   const { id: tripId } = useParams();
-  const navigate = useNavigate();
 
   const addTransactionMutation = useAddTransaction();
   const { data: trip } = useGetTripByIdOnDetailTrip(tripId || "");
@@ -175,13 +175,13 @@ export default function DetailTrip() {
             <button
               onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 bookingTrip(e);
-                navigate("/payment");
               }}
               className="text-white text-sm flex ml-auto px-8 py-1 font-semibold rounded focus:outline-none bg-#FFAF00"
             >
               BOOK NOW
             </button>
           </div>
+          <Toaster position="bottom-center" />
           {showDetailedImages && (
             <TripImagesSlide
               tripImages={[trip.cover_image, ...trip.detailed_images]}

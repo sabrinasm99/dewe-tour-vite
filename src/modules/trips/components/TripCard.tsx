@@ -3,7 +3,7 @@ import styles from "./styles/trip-card.module.css";
 import { MdEdit } from "react-icons/md";
 import { IoMdTrash } from "react-icons/io";
 import { TripProps } from "../../shared/types";
-import React from "react";
+import React, { useState } from "react";
 
 export default function TripCard({
   trip,
@@ -16,6 +16,7 @@ export default function TripCard({
 }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [showQuotaTooltip, setShowQuotaTooltip] = useState(false);
 
   const clickDetail = (id: string) => {
     navigate(`/trip/${id}`);
@@ -68,9 +69,30 @@ export default function TripCard({
           <p className="ml-1 font-medium">Delete</p>
         </section>
       </article>
-      <p className={styles["card-quota"]}>
+      <p
+        className={styles["card-quota"]}
+        onMouseOver={() => setShowQuotaTooltip(true)}
+        onMouseOut={() => setShowQuotaTooltip(false)}
+      >
         {trip.booked_slots}/{trip.quota}
       </p>
+      <div
+        className={`${
+          showQuotaTooltip ? "flex" : "hidden"
+        } absolute top-6 -right-11`}
+      >
+        <div
+          className="w-0 h-full border-r-gray-500"
+          style={{
+            borderTop: "10px solid transparent",
+            borderBottom: "10px solid transparent",
+            borderRightWidth: "10px",
+          }}
+        ></div>
+        <p className="bg-gray-500 text-gray-300 text-xs pr-1 rounded-r-sm">
+          Quota
+        </p>
+      </div>
     </section>
   );
 }

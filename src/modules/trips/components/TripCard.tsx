@@ -32,11 +32,22 @@ export default function TripCard({
       }}
       className={styles["card-container"]}
     >
-      <img
-        src={trip.cover_image}
-        alt={trip.cover_image}
-        className={styles["card-img"]}
-      />
+      <article className="relative">
+        <img
+          src={trip.cover_image}
+          alt={trip.cover_image}
+          className={styles["card-img"]}
+        />
+        <div
+          className={`${
+            trip.booked_slots === trip.quota ? "flex" : "hidden"
+          } z-10 absolute h-full w-full rounded-md bg-backdropGray top-0 left-0 justify-start items-end`}
+        >
+          <article className="bg-backdrop px-1 sm:px-2 sm:py-1 rounded-md ml-1 mb-1">
+            <p className="text-xs md:text-sm text-white font-bold">Sold Out</p>
+          </article>
+        </div>
+      </article>
       <h4 className={styles["card-title"]}>{trip.title}</h4>
       <article className={styles["price-and-place-container"]}>
         <h4 className={styles["card-price"]}>

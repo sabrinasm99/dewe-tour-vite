@@ -176,9 +176,14 @@ export default function DetailTrip() {
               onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 bookingTrip(e);
               }}
-              className="text-white text-sm flex ml-auto px-8 py-1 font-semibold rounded focus:outline-none bg-#FFAF00"
+              disabled
+              className={`${
+                trip.booked_slots === trip.quota
+                  ? "bg-gray-300 text-gray-400"
+                  : "bg-#FFAF00 text-white"
+              } text-sm flex ml-auto px-8 py-1 font-semibold rounded focus:outline-none`}
             >
-              BOOK NOW
+              {trip.booked_slots === trip.quota ? "SOLD OUT" : "BOOK NOW"}
             </button>
           </div>
           <Toaster position="bottom-center" />

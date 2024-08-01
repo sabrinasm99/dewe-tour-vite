@@ -39,8 +39,10 @@ export default function TripImagesSlide({
                     key={i}
                     onClick={() => handleCurrentIndex(i)}
                     className={`${
-                      i === currentIndex ? "border-2" : "border-0"
-                    } h-24 border-blue-500 cursor-pointer flex justify-center`}
+                      i === currentIndex
+                        ? "border-blue-500"
+                        : "border-transparent"
+                    } h-24 border-2 cursor-pointer flex justify-center`}
                   >
                     <img src={image} className="h-full object-cover" />
                   </div>

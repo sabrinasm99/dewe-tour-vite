@@ -176,7 +176,7 @@ export default function DetailTrip() {
               onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 bookingTrip(e);
               }}
-              disabled
+              disabled={trip.booked_slots === trip.quota}
               className={`${
                 trip.booked_slots === trip.quota
                   ? "bg-gray-300 text-gray-400"

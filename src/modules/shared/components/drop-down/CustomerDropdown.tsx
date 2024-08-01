@@ -42,8 +42,8 @@ export default function CustomerDropdown({
             }}
             className="flex py-1 px-5 cursor-pointer hover:bg-gray-200"
           >
-            <img src={user} className="mr-2" />
-            <h2 className="flex items-center">Profile</h2>
+            <img src={user} />
+            <p className="flex items-center ml-2">Profile</p>
           </div>
           <div
             onClick={() => {
@@ -52,16 +52,16 @@ export default function CustomerDropdown({
             }}
             className="flex py-1 px-5 cursor-pointer hover:bg-gray-200"
           >
-            <img src={bill} className="mr-2" />
-            <h2 className="">Pay</h2>
+            <img src={bill} />
+            <p className="ml-2">Pay</p>
           </div>
         </div>
         <div
           className="flex py-1 px-5 cursor-pointer hover:bg-gray-200"
           onClick={clickLogout}
         >
-          <img src={logout} className="mr-2" />
-          <h2>Logout</h2>
+          <img src={logout} />
+          <p className="ml-2">Logout</p>
         </div>
         <div className="absolute" style={{ top: "-11px", right: "2px" }}>
           <img src={triangle} />

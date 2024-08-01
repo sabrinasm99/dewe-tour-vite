@@ -47,6 +47,7 @@ export default function LoginModal({
               name="email"
               value={input.email}
               onChange={handleChange}
+              autoFocus
             />
           </div>
           <div className="mt-5">

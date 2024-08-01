@@ -52,6 +52,7 @@ export default function RegisterModal({
               name="name"
               value={input.name}
               onChange={handleChange}
+              autoFocus
             />
             {/* <h3 className="text-red-600 text-sm">{warning}</h3> */}
           </div>

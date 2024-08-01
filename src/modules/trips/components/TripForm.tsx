@@ -46,6 +46,8 @@ export default function TripForm({
     []
   );
 
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+
   const [inputTrip, setInputTrip] = useState<InputTripProps>({
     title: "",
     countryId: "",
@@ -54,15 +56,13 @@ export default function TripForm({
     eat: "",
     days: "",
     nights: "",
-    date: "",
+    date: selectedDate.toISOString().split("T")[0],
     price: "",
     quota: "",
     description: "",
   });
 
   const [tripId, setTripId] = useState("");
-
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
   const detailedImagesInput = useRef<HTMLInputElement>(null);
 
@@ -406,7 +406,7 @@ export default function TripForm({
           <div className="mt-5">
             <label className="font-bold pl-1">Price</label>
             <input
-              type="text"
+              type="number"
               name="price"
               value={inputTrip.price}
               onChange={handleChange}

@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useUserStore } from "../../../../store/useUserStore";
 import { useGetUserPofile } from "../../../users/api";
+import Loading from "../../components/loading";
 
 export default function AdminAuthenticatedRoute({
   children,
@@ -13,6 +14,10 @@ export default function AdminAuthenticatedRoute({
     isError: isErrorGetUserProfile,
   } = useGetUserPofile();
   const userId = useUserStore((state: any) => state.userId);
+
+  if (isLoadingGetUserProfile) {
+    return <Loading />;
+  }
 
   if (!isLoadingGetUserProfile && !isErrorGetUserProfile) {
     if (user.is_admin) {

@@ -15,8 +15,8 @@ export const useApproveTransaction = () => {
       });
     },
 
-    onError: (err) => {
-      console.log(err);
+    onError: (err: any) => {
+      console.log(err.response.data.message);
     },
   });
 };

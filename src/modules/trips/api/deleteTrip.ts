@@ -12,8 +12,8 @@ export const useDeleteTrip = () => {
       toast.success("The trip has been deleted");
     },
 
-    onError: (err) => {
-      toast.error(err.message);
+    onError: (err: any) => {
+      toast.error(err.response.data.message);
     },
   });
 };

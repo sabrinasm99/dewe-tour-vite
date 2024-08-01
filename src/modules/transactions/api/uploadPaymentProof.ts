@@ -17,8 +17,8 @@ export const useUploadPaymentProof = () => {
       queryClient.invalidateQueries({ queryKey: ["getTransactionsByUserId"] });
     },
 
-    onError: (err) => {
-      console.log(err);
+    onError: (err: any) => {
+      console.log(err.response.data.message);
     },
   });
 };

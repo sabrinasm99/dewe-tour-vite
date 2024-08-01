@@ -16,11 +16,13 @@ export const useRegister = () => {
 
   return useMutation({
     mutationFn: (data: RegisterProps) => userService.register(data),
+
     onSuccess: (res) => {
       updateUserId(res.data.data.id);
     },
-    onError: (err) => {
-      console.log(err);
+
+    onError: (err: any) => {
+      console.log(err.response.data.message);
     },
   });
 };

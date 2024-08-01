@@ -14,14 +14,16 @@ export const useLogin = () => {
 
   return useMutation({
     mutationFn: (data: LoginProps) => userService.login(data),
+
     onSuccess: (res) => {
       updateUserId(res.data.data.id);
       if (res.data.data.isAdmin) {
         navigate("/transaction-list");
       }
     },
-    onError: (err) => {
-      console.log(err);
+
+    onError: (err: any) => {
+      console.log(err.response.data.message);
     },
   });
 };

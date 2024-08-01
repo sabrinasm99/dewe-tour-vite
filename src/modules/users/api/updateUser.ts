@@ -6,11 +6,13 @@ export const useUpdateUser = () => {
 
   return useMutation({
     mutationFn: (data: FormData) => userService.updateUser(data),
+
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getUserProfile"] });
     },
-    onError: (err) => {
-      console.log(err);
+
+    onError: (err: any) => {
+      console.log(err.response.data.message);
     },
   });
 };

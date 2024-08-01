@@ -3,7 +3,7 @@
 }
 
 .card-img {
-  @apply w-full object-cover rounded-md;
+  @apply w-full object-cover rounded-md h-32 sm:h-48 md:h-56 xl:h-255px;
 }
 
 .card-title {

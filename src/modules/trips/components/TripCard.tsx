@@ -90,19 +90,19 @@ export default function TripCard({
       <div
         className={`${
           showQuotaTooltip ? "flex" : "hidden"
-        } absolute top-6 -right-11`}
+        } absolute top-6 right-11 z-10`}
       >
+        <p className="bg-gray-500 text-gray-300 text-xs px-1 rounded-l-sm">
+          Quota
+        </p>
         <div
-          className="w-0 h-full border-r-gray-500"
+          className="w-0 h-full border-l-gray-500"
           style={{
             borderTop: "10px solid transparent",
             borderBottom: "10px solid transparent",
-            borderRightWidth: "10px",
+            borderLeftWidth: "10px",
           }}
         ></div>
-        <p className="bg-gray-500 text-gray-300 text-xs pr-1 rounded-r-sm">
-          Quota
-        </p>
       </div>
     </section>
   );

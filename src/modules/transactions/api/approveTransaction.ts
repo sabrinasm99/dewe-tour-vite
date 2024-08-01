@@ -4,7 +4,7 @@ import { transactionService } from "../services";
 export const useApproveTransaction = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (id: string) => transactionService.approveTransaction(id),
+    mutationFn: (id: number) => transactionService.approveTransaction(id),
 
     onSuccess: () => {
       queryClient.invalidateQueries({

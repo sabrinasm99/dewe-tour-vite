@@ -5,7 +5,7 @@ export const usePayForTrip = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (id: string) => transactionService.payForTrip(id),
+    mutationFn: (id: number) => transactionService.payForTrip(id),
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getTransactionsByUserId"] });

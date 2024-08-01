@@ -34,7 +34,7 @@ export type TripProps = {
 };
 
 export type TransactionProps = {
-  id: string;
+  id: number;
   customer: CustomerProps;
   quantity: number;
   total_payment: number;

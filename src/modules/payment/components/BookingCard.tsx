@@ -62,7 +62,7 @@ export default function BookingCard({
     }
   };
 
-  const clickPay = (id: string) => {
+  const clickPay = (id: number) => {
     if (!transaction.attachment) {
       toast.error("You must attach payment proof first");
       return;
@@ -86,7 +86,7 @@ export default function BookingCard({
     }
   };
 
-  const clickApprove = (id: string) => {
+  const clickApprove = (id: number) => {
     approveTransactionMutation.mutate(id);
   };
 
@@ -235,7 +235,7 @@ export default function BookingCard({
             </div>
             <div className="lg:border-b-2 flex lg:py-1 w-1/2 lg:w-full border-bookingCard">
               <div className="flex flex-col lg:flex-row w-full lg:w-2/3 text-#B1B1B1">
-                <h2 className="lg:w-1/4">1</h2>
+                <h2 className="lg:w-1/4">{transaction.id}</h2>
                 <h2 className="lg:w-1/4">{transaction.customer.name}</h2>
                 <h2 className="lg:w-1/4 capitalize">
                   {transaction.customer.gender}

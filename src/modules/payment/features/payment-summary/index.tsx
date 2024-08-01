@@ -6,7 +6,7 @@ export default function PaymentSummary() {
   const { data: transactions } = useGetTransactionsByUserId();
 
   return (
-    <div className="grow flex flex-col-reverse justify-center items-center">
+    <div className="grow flex flex-col justify-center items-center">
       {transactions && transactions.length ? (
         transactions.map((transaction: TransactionProps) => (
           <BookingCard

@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { transactionService } from "../services";
 
 type UploadPaymentProofProps = {
-  id: string;
+  id: number;
   data: FormData;
 };
 

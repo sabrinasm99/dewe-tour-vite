@@ -141,7 +141,7 @@ export class TransactionService extends BaseAPI {
     }
   }
 
-  async payForTrip(id: string) {
+  async payForTrip(id: number) {
     try {
       const token = this.authService.getToken("access-token");
       if (!token) {
@@ -158,7 +158,7 @@ export class TransactionService extends BaseAPI {
     }
   }
 
-  async uploadPaymentProof(id: string, data: FormData) {
+  async uploadPaymentProof(id: number, data: FormData) {
     try {
       const token = this.authService.getToken("access-token");
       if (!token) {
@@ -175,7 +175,7 @@ export class TransactionService extends BaseAPI {
     }
   }
 
-  async approveTransaction(id: string) {
+  async approveTransaction(id: number) {
     try {
       const token = this.authService.getToken("access-token");
       if (!token) {

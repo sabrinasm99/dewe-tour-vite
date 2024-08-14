@@ -7,7 +7,7 @@ export default function TransactionApprovalModal({
   transactionId,
 }: {
   setShowApprovalModal: React.Dispatch<boolean>;
-  transactionId: string;
+  transactionId: number;
 }) {
   const { data: transaction } = useGetTransactionById(transactionId);
 

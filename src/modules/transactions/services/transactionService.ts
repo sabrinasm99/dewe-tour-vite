@@ -55,7 +55,7 @@ export class TransactionService extends BaseAPI {
     }
   }
 
-  async getTransactionById(id: string) {
+  async getTransactionById(id: number) {
     try {
       const token = this.authService.getToken("access-token");
       if (!token) {

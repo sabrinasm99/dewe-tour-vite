@@ -7,7 +7,7 @@ import { TransactionProps } from "../../../shared/types";
 
 export default function TransactionList() {
   const [showApprovalModal, setShowApprovalModal] = useState(false);
-  const [selectedId, setSelectedId] = useState("");
+  const [selectedId, setSelectedId] = useState(0);
   const { data: transactions } = useGetAllTransactions();
 
   return (

@@ -1,11 +1,11 @@
-const isProduction = process.env.NODE_ENV === "production";
+const isProduction = import.meta.env.VITE_ENV === "production";
 
 const devApiConfig = {
   baseUrl: "http://localhost:3000",
 };
 
 const prodApiConfig = {
-  baseUrl: "",
+  baseUrl: "https://api.dewetour.sabrinasm.com",
 };
 
 const apiConfig = isProduction ? prodApiConfig : devApiConfig;

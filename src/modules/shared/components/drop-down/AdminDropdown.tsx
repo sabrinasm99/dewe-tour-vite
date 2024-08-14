@@ -35,7 +35,7 @@ export default function AdminDropdown({
             onClick={() => {
               setShowAdminDropdown(!showAdminDropdown);
               const navTo =
-                pathname === "/transaction-list"
+                pathname !== "/admin-trip-list"
                   ? "/admin-trip-list"
                   : "/transaction-list";
               navigate(navTo);
@@ -45,7 +45,7 @@ export default function AdminDropdown({
             <img
               src={journey}
               className={`${
-                pathname === "/transaction-list" ? "block" : "hidden"
+                pathname !== "/admin-trip-list" ? "block" : "hidden"
               }`}
             />
             <div
@@ -56,7 +56,7 @@ export default function AdminDropdown({
               <CiViewTable className="text-xl text-blue-700" />
             </div>
             <p className="ml-2">
-              {pathname === "/transaction-list" ? "Trip" : "Transaction"}
+              {pathname !== "/admin-trip-list" ? "Trip" : "Transaction"}
             </p>
           </div>
         </div>

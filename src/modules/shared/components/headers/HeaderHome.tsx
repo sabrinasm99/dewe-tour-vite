@@ -7,9 +7,11 @@ import CustomerDropdown from "../drop-down/CustomerDropdown";
 import AdminDropdown from "../drop-down/AdminDropdown";
 import { useUserStore } from "../../../../store/useUserStore";
 import { useGetUserPofile } from "../../../users/api";
+import { useSearchTripStore } from "../../../../store/useSearchTripStore";
 
 export default function HeaderHome() {
-  const [search, setSearch] = useState("");
+  const search = useSearchTripStore((state: any) => state.search);
+  const updateSearch = useSearchTripStore((state: any) => state.updateSearch);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showCustomerDropdown, setShowCustomerDropdown] = useState(false);
@@ -28,7 +30,7 @@ export default function HeaderHome() {
   }, [userId]);
 
   const handleSearch = (e: any) => {
-    setSearch(e.target.value);
+    updateSearch(e.target.value);
   };
 
   return (
@@ -113,6 +115,7 @@ export default function HeaderHome() {
                 type="search"
                 value={search}
                 name="search"
+                placeholder="Search by Trip Title or Trip Country"
                 onChange={handleSearch}
               />
               <button className="rounded-r-md flex items-center justify-center font-medium text-sm md:text-lg focus:outline-none bg-#FFAF00 w-20% md:w-10%">

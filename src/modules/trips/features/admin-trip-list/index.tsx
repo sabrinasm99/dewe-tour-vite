@@ -22,8 +22,7 @@ export default function AdminTripList() {
             <h1 className="text-3xl font-bold">Trip List</h1>
             <div className="ml-auto flex items-center">
               <button
-                className="text-white text-sm font-semibold py-1 px-6 rounded focus:outline-none"
-                style={{ backgroundColor: "#FFAF00" }}
+                className="text-white bg-#FFAF00 text-sm font-semibold py-1 px-6 rounded focus:outline-none"
                 onClick={() => navigate("/add-trip")}
               >
                 Add Trip

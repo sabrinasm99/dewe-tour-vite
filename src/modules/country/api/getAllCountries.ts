@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { countryService } from "../services";
 
-export const getAllCountries = () => {
+export const useGetAllCountries = () => {
   return useQuery({
-    queryKey: ["countries"],
+    queryKey: ["getAllCountries"],
     queryFn: () => countryService.getAllCountries(),
   });
 };

@@ -1,3 +1,5 @@
-import { getAllCountries } from "./getAllCountries";
+import { useAddCountry } from "./addCountry";
+import { useDeleteCountry } from "./deleteCountry";
+import { useGetAllCountries } from "./getAllCountries";
 
-export { getAllCountries };
+export { useGetAllCountries, useAddCountry, useDeleteCountry };

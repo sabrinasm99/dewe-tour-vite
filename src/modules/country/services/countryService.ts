@@ -20,4 +20,37 @@ export class CountryService extends BaseAPI {
       throw error;
     }
   }
+
+  async addCountry(data: any) {
+    try {
+      const token = this.authService.getToken("access-token");
+      if (!token) {
+        throw new Error("You are not authenticated");
+      }
+
+      const result = await this.post("/countries", data, null, {
+        Authorization: token,
+      });
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteCountry(id: string) {
+    try {
+      const token = this.authService.getToken("access-token");
+      if (!token) {
+        throw new Error("You are not authenticated");
+      }
+      const result = this.delete(`/countries/${id}`, null, null, {
+        Authorization: token,
+      });
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { IoAddCircle } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
-import { getAllCountries } from "../../country/api";
+import { useGetAllCountries } from "../../country/api";
 import { useAddTrip, useUpdateTrip } from "../api";
-import { TripProps } from "../../shared/types";
+import { CountryProps, TripProps } from "../../shared/types";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaCalendar } from "react-icons/fa";
+import ManageCountry from "../../country/modals/ManageCountry";
 
 type ImageProps = {
   fileObj: File | any;
@@ -35,6 +36,8 @@ export default function TripForm({
   formType: string;
   trip?: TripProps;
 }) {
+  const [showManageCountry, setShowManageCountry] = useState(false);
+
   const [coverImage, setCoverImage] = useState<ImageProps>({
     fileObj: null,
     fileUrl: "",
@@ -66,7 +69,7 @@ export default function TripForm({
 
   const detailedImagesInput = useRef<HTMLInputElement>(null);
 
-  const { data: countries } = getAllCountries();
+  const { data: countries } = useGetAllCountries();
 
   const addTripMutation = useAddTrip();
 
@@ -323,14 +326,44 @@ export default function TripForm({
               <option value=""> </option>
               {countries &&
                 countries.length > 0 &&
-                countries.map((val: any) => {
+                countries.map((country: CountryProps) => {
                   return (
-                    <option key={val.id} value={val.id}>
-                      {val.name}
+                    <option key={country.id} value={country.id}>
+                      {country.name}
                     </option>
                   );
                 })}
             </select>
+            <button
+              type="button"
+              onClick={() => setShowManageCountry(!showManageCountry)}
+              className="mt-2 flex rounded-md px-2 py-1 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium"
+            >
+              Manage Country
+            </button>
+            {showManageCountry && (
+              <ManageCountry
+                setShowManageCountry={setShowManageCountry}
+                countries={countries ? countries : []}
+              />
+            )}
+            {/* <div className="mt-1 h-24 w-1/2 bg-gray-200 rounded-md overflow-y-auto p-2">
+              <div className="flex flex-wrap">
+                <div className="bg-gray-700 text-white rounded-lg flex px-1 mr-1 mb-1">
+                  <p>India</p>
+                  <div className="flex items-center ml-2">
+                    <TiDelete className="text-xl cursor-pointer" />
+                  </div>
+                </div>
+              </div>
+            </div> */}
+            {/* <div className="mt-1">
+              <label className="text-sm font-medium">Insert Country</label>
+              <input
+                type="text"
+                className="bg-gray-200 block focus:outline-none pl-1"
+              />
+            </div> */}
           </div>
           <div className="mt-5">
             <label className="font-bold pl-1">Accomodation</label>
@@ -526,6 +559,7 @@ export default function TripForm({
           </div>
           <div className="mt-16 flex justify-center">
             <button
+              type="submit"
               className="font-semibold px-12 py-1 text-white rounded"
               onClick={(e) => (trip ? submitSaveTrip(e) : submitAddTrip(e))}
               style={{ backgroundColor: "#FFAF00" }}

@@ -14,7 +14,7 @@ export default function RegisterModal({
     password: "",
     phone: "",
     address: "",
-    gender: "",
+    gender: "male",
   });
 
   const handleChange = (

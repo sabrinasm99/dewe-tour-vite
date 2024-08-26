@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { CountryProps } from "../../shared/types";
-import { useAddCountry, useDeleteCountry } from "../api";
+import { useAddCountry, useDeleteCountry, useUpdateCountry } from "../api";
 
 export default function ManageCountry({
   setShowManageCountry,
@@ -17,6 +17,7 @@ export default function ManageCountry({
   const [currentCountryToEdit, setCurrentCountryToEdit] = useState("");
   const addCountryMutation = useAddCountry();
   const deleteCountryMutation = useDeleteCountry();
+  const updateCountryMutation = useUpdateCountry();
 
   const handleChangeNewCountry = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewCountry(e.target.value);
@@ -42,6 +43,19 @@ export default function ManageCountry({
     e.preventDefault();
     setEditMode(true);
     setCurrentCountryToEdit(selectedCountry.name);
+  };
+
+  const handleUpdateCountry = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    updateCountryMutation.mutate({
+      id: selectedCountry.id,
+      data: { name: currentCountryToEdit },
+    });
+
+    setSelectedCountry({ ...selectedCountry, name: currentCountryToEdit });
+    setEditMode(false);
+    setCurrentCountryToEdit("");
   };
 
   const handleDeleteCountry = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -110,7 +124,7 @@ export default function ManageCountry({
                   onChange={handleChangeNewCountry}
                 />
                 <button
-                  type="submit"
+                  type="button"
                   className={`${
                     newCountry
                       ? "bg-blue-500 text-white"
@@ -156,14 +170,11 @@ export default function ManageCountry({
               </div>
               {editMode ? (
                 <button
-                  type="button"
+                  type="submit"
                   className={`${
                     editMode ? "block" : "hidden"
                   } bg-green-500 text-white ml-2 px-2 rounded-sm`}
-                  onMouseDown={() => {
-                    setEditMode(false);
-                    setCurrentCountryToEdit("");
-                  }}
+                  onMouseDown={handleUpdateCountry}
                 >
                   Save
                 </button>
@@ -182,7 +193,7 @@ export default function ManageCountry({
                 </button>
               )}
               <button
-                type="button"
+                type="submit"
                 disabled={!selectedCountry.name || editMode}
                 onMouseDown={handleDeleteCountry}
                 className={`${

@@ -341,29 +341,6 @@ export default function TripForm({
             >
               Manage Country
             </button>
-            {showManageCountry && (
-              <ManageCountry
-                setShowManageCountry={setShowManageCountry}
-                countries={countries ? countries : []}
-              />
-            )}
-            {/* <div className="mt-1 h-24 w-1/2 bg-gray-200 rounded-md overflow-y-auto p-2">
-              <div className="flex flex-wrap">
-                <div className="bg-gray-700 text-white rounded-lg flex px-1 mr-1 mb-1">
-                  <p>India</p>
-                  <div className="flex items-center ml-2">
-                    <TiDelete className="text-xl cursor-pointer" />
-                  </div>
-                </div>
-              </div>
-            </div> */}
-            {/* <div className="mt-1">
-              <label className="text-sm font-medium">Insert Country</label>
-              <input
-                type="text"
-                className="bg-gray-200 block focus:outline-none pl-1"
-              />
-            </div> */}
           </div>
           <div className="mt-5">
             <label className="font-bold pl-1">Accomodation</label>
@@ -570,6 +547,12 @@ export default function TripForm({
           </div>
         </form>
       </div>
+      {showManageCountry && (
+        <ManageCountry
+          setShowManageCountry={setShowManageCountry}
+          countries={countries ? countries : []}
+        />
+      )}
     </div>
   );
 }

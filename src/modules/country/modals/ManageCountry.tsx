@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { CountryProps } from "../../shared/types";
-import { useAddCountry, useDeleteCountry, useUpdateCountry } from "../api";
+import { useAddCountry, useUpdateCountry } from "../api";
+import CountryDeleteConfirmation from "./CountryDeleteConfirmation";
+
+export type SelectedCountryProps = {
+  id: string;
+  name: string;
+};
 
 export default function ManageCountry({
   setShowManageCountry,
@@ -11,12 +17,12 @@ export default function ManageCountry({
   countries: CountryProps[];
 }) {
   const [selectedCountry, setSelectedCountry] = useState({ id: "", name: "" });
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [search, setSearch] = useState("");
   const [newCountry, setNewCountry] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [currentCountryToEdit, setCurrentCountryToEdit] = useState("");
   const addCountryMutation = useAddCountry();
-  const deleteCountryMutation = useDeleteCountry();
   const updateCountryMutation = useUpdateCountry();
 
   const handleChangeNewCountry = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,21 +54,16 @@ export default function ManageCountry({
   const handleUpdateCountry = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    updateCountryMutation.mutate({
-      id: selectedCountry.id,
-      data: { name: currentCountryToEdit },
-    });
+    if (selectedCountry.name !== currentCountryToEdit) {
+      updateCountryMutation.mutate({
+        id: selectedCountry.id,
+        data: { name: currentCountryToEdit },
+      });
+    }
 
     setSelectedCountry({ ...selectedCountry, name: currentCountryToEdit });
     setEditMode(false);
     setCurrentCountryToEdit("");
-  };
-
-  const handleDeleteCountry = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
-    deleteCountryMutation.mutate(selectedCountry.id);
-    setSelectedCountry({ id: "", name: "" });
   };
 
   const filteredCountries = countries.length
@@ -73,7 +74,11 @@ export default function ManageCountry({
 
   return (
     <>
-      <div className="fixed z-30 bg-white top-50% left-50% -translate-x-50% -translate-y-50% w-90% md:w-3/4 lg:w-3/5 xl:w-1/2 min-[1500px]:w-2/5">
+      <div
+        className={`fixed ${
+          showDeleteConfirmation ? "z-20" : "z-30"
+        } bg-white top-50% left-50% -translate-x-50% -translate-y-50% w-90% md:w-3/4 lg:w-3/5 xl:w-1/2 min-[1500px]:w-2/5`}
+      >
         <div className="flex bg-blue-500 px-4 py-2">
           <p className="text-white text-2xl">Manage Country</p>
           <div className="ml-auto text-white flex items-center">
@@ -137,13 +142,13 @@ export default function ManageCountry({
                 </button>
               </div>
             </div>
-            <div className="mt-2 flex">
+            <div className="mt-2 flex flex-col sm:flex-row">
               <div className="w-full flex">
                 <span className="mr-1">Selected:</span>
                 {currentCountryToEdit && editMode ? (
                   <input
                     type="text"
-                    className="focus:outline-none border border-gray-200 grow"
+                    className="focus:outline-none border border-gray-200 w-full"
                     value={currentCountryToEdit}
                     onChange={handleChangeCountryName}
                     autoFocus
@@ -168,42 +173,46 @@ export default function ManageCountry({
                   </span>
                 )}
               </div>
-              {editMode ? (
-                <button
-                  type="submit"
-                  className={`${
-                    editMode ? "block" : "hidden"
-                  } bg-green-500 text-white ml-2 px-2 rounded-sm`}
-                  onMouseDown={handleUpdateCountry}
-                >
-                  Save
-                </button>
-              ) : (
+              <div className="flex mt-2 sm:mt-0">
+                {editMode ? (
+                  <button
+                    type="submit"
+                    className={`${
+                      editMode ? "block" : "hidden"
+                    } bg-green-500 text-white ml-auto sm:ml-2 px-2 rounded-sm`}
+                    onMouseDown={handleUpdateCountry}
+                  >
+                    Save
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    disabled={!selectedCountry.name || editMode}
+                    onMouseDown={handleClickEditCountry}
+                    className={`${
+                      selectedCountry.name && !editMode
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-300 text-gray-400"
+                    } ml-auto sm:ml-2 px-2 rounded-sm`}
+                  >
+                    Edit
+                  </button>
+                )}
                 <button
                   type="button"
                   disabled={!selectedCountry.name || editMode}
-                  onMouseDown={handleClickEditCountry}
+                  onMouseDown={() =>
+                    setShowDeleteConfirmation(!showDeleteConfirmation)
+                  }
                   className={`${
                     selectedCountry.name && !editMode
-                      ? "bg-blue-500 text-white"
+                      ? "bg-red-500 text-white"
                       : "bg-gray-300 text-gray-400"
                   } ml-2 px-2 rounded-sm`}
                 >
-                  Edit
+                  Delete
                 </button>
-              )}
-              <button
-                type="submit"
-                disabled={!selectedCountry.name || editMode}
-                onMouseDown={handleDeleteCountry}
-                className={`${
-                  selectedCountry.name && !editMode
-                    ? "bg-red-500 text-white"
-                    : "bg-gray-300 text-gray-400"
-                } ml-2 px-2 rounded-sm`}
-              >
-                Delete
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -212,6 +221,13 @@ export default function ManageCountry({
         onClick={() => setShowManageCountry(false)}
         className="fixed z-20 top-0 left-0 h-full w-full bg-backdrop"
       />
+      {showDeleteConfirmation && (
+        <CountryDeleteConfirmation
+          setShowDeleteConfirmation={setShowDeleteConfirmation}
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
+        />
+      )}
     </>
   );
 }

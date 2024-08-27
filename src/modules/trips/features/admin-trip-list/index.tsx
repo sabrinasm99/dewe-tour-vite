@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import TripCard from "../../components/TripCard";
 import { useGetAllTrips } from "../../api";
 import { TripProps } from "../../../shared/types";
-import DeleteConfirmation from "../../modals/DeleteConfirmation";
+import TripDeleteConfirmation from "../../modals/TripDeleteConfirmation";
 import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 
@@ -49,7 +49,7 @@ export default function AdminTripList() {
       </div>
       <Toaster position="bottom-center" />
       {showDeleteConfirmation && (
-        <DeleteConfirmation
+        <TripDeleteConfirmation
           selectedTrip={selectedTrip}
           setShowDeleteConfirmation={setShowDeleteConfirmation}
         />

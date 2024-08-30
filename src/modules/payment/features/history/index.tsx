@@ -12,6 +12,7 @@ export default function PaymentHistories() {
         {transactions && transactions.length ? (
           transactions.map((transaction: TransactionProps) => (
             <BookingCard
+              key={transaction.id}
               addedStyles="w-full xl:w-full"
               transaction={transaction}
             />

@@ -12,35 +12,17 @@ export default function PaymentProofModal({
   };
   return (
     <>
-      <div
-        style={{
-          position: "fixed",
-          zIndex: 200,
-          transform: "translate(-50%,-50%)",
-          left: "50%",
-          top: "50%",
-          width: "350px",
-          boxShadow: "1px 1px 8px black",
-        }}
-        className="rounded-md p-4 bg-white"
-      >
+      <div className="fixed z-20 top-50% left-50% -translate-x-50% -translate-y-50% rounded-md shadow-modal w-350px p-4 bg-white">
         {imageUrl ? (
           <img src={imageUrl} className="w-full" alt="image" />
         ) : (
-          <div
-            className="w-full rounded flex justify-center items-center text-center"
-            style={{
-              backgroundColor: "lightgray",
-              height: "16em",
-            }}
-          >
+          <div className="w-full rounded flex justify-center items-center text-center bg-#D3D3D3 h-16em">
             <span
               style={{
-                color: "grey",
                 letterSpacing: "3px",
                 fontWeight: 400,
               }}
-              className="px-1 text-2xl"
+              className="px-1 text-2xl text-#808080"
             >
               PAYMENT PROOF
             </span>
@@ -58,15 +40,7 @@ export default function PaymentProofModal({
       </div>
       <div
         onClick={closeModal}
-        style={{
-          position: "fixed",
-          zIndex: 199,
-          top: 0,
-          left: 0,
-          height: "100%",
-          width: "100%",
-          backgroundColor: "rgba(0,0,0,0.5)",
-        }}
+        className="fixed z-10 top-0 left-0 h-full w-full bg-backdrop"
       />
     </>
   );

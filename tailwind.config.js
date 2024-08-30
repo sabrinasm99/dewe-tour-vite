@@ -29,6 +29,7 @@ export default {
         "450px": "450px",
         "174.663px": "174.663px",
         "255px": "255px",
+        "16em": "16em",
       },
       fontSize: {
         "60px": "60px",

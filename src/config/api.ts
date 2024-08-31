@@ -5,7 +5,7 @@ const devApiConfig = {
 };
 
 const prodApiConfig = {
-  baseUrl: "https://api.dewetour.sabrinasm.com",
+  baseUrl: import.meta.env.VITE_URL,
 };
 
 const apiConfig = isProduction ? prodApiConfig : devApiConfig;
